@@ -53,19 +53,29 @@ public class Player_Controller : MonoBehaviour {
             Debug.DrawRay(Camera.main.transform.position, (Camera.main.transform.forward) * hit.distance, Color.yellow);
             Debug.Log("Did Hit");
             endpoint = hit.point;
-           
+            ////*
+            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube.transform.position = endpoint;
+            Destroy(cube, 1);
+            ///*/
+
         }
         else
         {
             Debug.DrawRay(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward) * 1000, Color.white);
             Debug.Log("Did not Hit");
-            endpoint = Camera.main.transform.forward * 100;
+            endpoint = transform.TransformDirection(Camera.main.transform.forward) * 1000;
         }
         
         GetComponent<LineRenderer>().enabled = true;
         GetComponent<LineRenderer>().SetPositions(new Vector3[] {shotPoint.position, endpoint});
         Invoke("RemoveTrail", .06f);
-        
+        ///*
+        GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube2.transform.position = endpoint;
+        Destroy(cube2, 1);
+        ///*/
+
     }
 
     private void RemoveTrail()
