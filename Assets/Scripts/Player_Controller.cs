@@ -86,7 +86,9 @@ public class Player_Controller : MonoBehaviour {
     private void processMovementInput()
     {
         TestRotation();
-        Rigid.MovePosition(transform.position + (Camera.main.transform.forward * Input.GetAxis("Vertical") * MoveSpeed) + (Camera.main.transform.right * Input.GetAxis("Horizontal") * MoveSpeed));
+        Vector3 VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
+        Vector3 HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
+        Rigid.MovePosition(transform.position + VShift + HShift);
         if (Input.GetKeyDown("space") && groundTest())
             Rigid.AddForce(transform.up * JumpForce);
     }
