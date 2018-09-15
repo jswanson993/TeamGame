@@ -53,8 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Player_Controller.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Player_Controller.cs" />
+     <None Include="Assets\Forceling\ForcelingWorldSpaceGrid\Forceling_WorldSpaceGrid.shader" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/GIT/TradGameDev/TeamGame/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
