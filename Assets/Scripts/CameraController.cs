@@ -24,10 +24,12 @@ public class CameraController : MonoBehaviour {
         if (is2D) {
             camera3D.enabled = true;
             camera2D.enabled = false;
+            is2D = false;
             
         } else {
             camera2D.enabled = true;
             camera3D.enabled = false;
+            is2D = true;
         }
     }
 }
