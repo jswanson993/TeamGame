@@ -6,20 +6,26 @@ using UnityEngine;
 public class Player_Controller : MonoBehaviour {
 
 
-    #region "Variables"
     public Rigidbody Rigid;
     public float MouseSensitivity;
     public float MoveSpeed;
     public float JumpForce;
     public float groundCheckDistance;
-    #endregion
+    public float wallRunSnapDistance;
     static bool playerCanJump;
     Vector2 rotation = new Vector2(0, 0);
     Transform shotPoint;
+    private Vector3 wallRunVector;
+    Rigidbody p_rigidbody;
+
+    public enum JumpState {Grounded, InAir, Wallrunning};
+    JumpState jState;
 
     // Use this for initialization
     void Start () {
 
+        p_rigidbody = GetComponent<Rigidbody>(); 
+        jState = JumpState.Grounded;
         Rigid = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         playerCanJump = true;
@@ -32,7 +38,60 @@ public class Player_Controller : MonoBehaviour {
 
         processMovementInput();
         processButtonInput();
+
+        if(jState == JumpState.Wallrunning)
+        {
+            wallRun();
+        }
+        else
+        {
+            groundTest();
+        }
+        Debug.Log(jState.ToString());
 	}
+
+    private void wallRun()
+    {
+        RaycastHit filteredHit;
+        Vector3 rayDirection;
+
+        RaycastHit hitR;
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.right, out hitR, wallRunSnapDistance))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * hitR.distance, Color.yellow);
+            Debug.Log("RightSide WallRunHit");
+            
+        }
+
+        RaycastHit hitL;
+        if (Physics.Raycast(Camera.main.transform.position, -Camera.main.transform.right, out hitL, wallRunSnapDistance))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.right) * hitR.distance, Color.yellow);
+            Debug.Log("LeftSide WallRunHit");
+            
+        }
+
+        if(hitL.distance > hitR.distance)
+        {
+            filteredHit = hitR;
+            rayDirection = Camera.main.transform.right;
+        }
+        else
+        {
+            filteredHit = hitL;
+            rayDirection = -Camera.main.transform.right;
+        }
+
+        Vector3 surfaceParallel = Vector3.ProjectOnPlane(rayDirection, filteredHit.normal);
+        Debug.DrawRay(Camera.main.transform.position, surfaceParallel, Color.red, 1f);
+
+        if(filteredHit.distance > wallRunSnapDistance)
+        {
+            jState = JumpState.InAir;
+            p_rigidbody.useGravity = true;
+        }
+    }
 
     private void processButtonInput()
     {
@@ -40,7 +99,35 @@ public class Player_Controller : MonoBehaviour {
         {
             shoot();
         }
-        
+        if (Input.GetButtonDown("Jump") && jState == JumpState.InAir && CanWallRun() && jState != JumpState.Wallrunning)
+        {
+            jState = JumpState.Wallrunning;
+            //Debug.Log(p_rigidbody.velocity.to)
+            p_rigidbody.velocity = Vector3.Scale(p_rigidbody.velocity, new Vector3(1, 0, 1));
+            p_rigidbody.useGravity = false;
+        }
+
+    }
+
+    private bool CanWallRun()
+    {
+        RaycastHit hitR;
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.right, out hitR, wallRunSnapDistance))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * hitR.distance, Color.yellow);
+            Debug.Log("RightSide WallRunHit");
+            return true;
+        }
+
+        RaycastHit hitL;
+        if (Physics.Raycast(Camera.main.transform.position, -Camera.main.transform.right, out hitL, wallRunSnapDistance))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.right) * hitR.distance, Color.yellow);
+            Debug.Log("LeftSide WallRunHit");
+            return true;
+        }
+
+        return false;
     }
 
     private void shoot()
@@ -86,11 +173,24 @@ public class Player_Controller : MonoBehaviour {
     private void processMovementInput()
     {
         TestRotation();
-        Vector3 VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
-        Vector3 HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
-        Rigid.MovePosition(transform.position + VShift + HShift);
-        if (Input.GetKeyDown("space") && groundTest())
-            Rigid.AddForce(transform.up * JumpForce);
+
+        if (jState != JumpState.Wallrunning)
+        {
+            Vector3 VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
+            Vector3 HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
+            //Rigid.MovePosition(transform.position + VShift + HShift);
+            Rigid.AddForce(Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f)); 
+            if (Input.GetButtonDown("Jump") && groundTest())
+            {
+                Rigid.AddForce(transform.up * JumpForce);
+                jState = JumpState.InAir;
+            }
+        }
+
+        //Invoke("groundTest", .3f);
+        
+        
+
     }
 
     private bool groundTest()
@@ -105,13 +205,15 @@ public class Player_Controller : MonoBehaviour {
             if (Physics.Raycast(transform.position, transform.TransformDirection(-transform.up), out hit, Mathf.Infinity))
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(-transform.up) * hit.distance, Color.yellow);
-                Debug.Log("Did Hit");
+                //Debug.Log("Did Hit");
                 if(hit.distance < groundCheckDistance)
                 {
+                    jState = JumpState.Grounded;
                     return true;
                 }
                 else
                 {
+                    jState = JumpState.InAir;
                     return false;
                 }
             }
