@@ -485,12 +485,27 @@ Prefab:
     - target: {fileID: 54521210090078892, guid: 323e519e36d6b3a4fa1200f8388e31c6,
         type: 2}
       propertyPath: m_Constraints
-      value: 80
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 114204978622690978, guid: 323e519e36d6b3a4fa1200f8388e31c6,
         type: 2}
       propertyPath: MoveSpeed
-      value: 5
+      value: 6.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114204978622690978, guid: 323e519e36d6b3a4fa1200f8388e31c6,
+        type: 2}
+      propertyPath: MaxMoveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114204978622690978, guid: 323e519e36d6b3a4fa1200f8388e31c6,
+        type: 2}
+      propertyPath: MouseSensitivity
+      value: 2.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 54521210090078892, guid: 323e519e36d6b3a4fa1200f8388e31c6,
+        type: 2}
+      propertyPath: m_Drag
+      value: 1.87
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 323e519e36d6b3a4fa1200f8388e31c6, type: 2}
@@ -519,7 +534,7 @@ MeshCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1546171871}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0e54c7c5de5e79944961b09204dcd69e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3

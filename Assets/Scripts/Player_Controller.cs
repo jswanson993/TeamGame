@@ -12,6 +12,7 @@ public class Player_Controller : MonoBehaviour {
     public float JumpForce;
     public float groundCheckDistance;
     public float wallRunSnapDistance;
+    public float MaxMoveSpeed;
     static bool playerCanJump;
     Vector2 rotation = new Vector2(0, 0);
     Transform shotPoint;
@@ -36,7 +37,7 @@ public class Player_Controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        processMovementInput();
+        
         processButtonInput();
 
         if(jState == JumpState.Wallrunning)
@@ -49,6 +50,12 @@ public class Player_Controller : MonoBehaviour {
         }
         Debug.Log(jState.ToString());
 	}
+
+    void FixedUpdate()
+    {
+        processMovementInput();
+    }
+
 
     private void wallRun()
     {
@@ -83,14 +90,25 @@ public class Player_Controller : MonoBehaviour {
             rayDirection = -Camera.main.transform.right;
         }
 
-        Vector3 surfaceParallel = Vector3.ProjectOnPlane(rayDirection, filteredHit.normal);
-        Debug.DrawRay(Camera.main.transform.position, surfaceParallel, Color.red, 1f);
-
-        if(filteredHit.distance > wallRunSnapDistance)
+        if (Physics.Raycast(Camera.main.transform.position, rayDirection, wallRunSnapDistance))
         {
-            jState = JumpState.InAir;
-            p_rigidbody.useGravity = true;
+            
+
+            //Vector3 surfaceParallel = Vector3.ProjectOnPlane(rayDirection, filteredHit.normal);
+            Vector3 surfaceParallel = Quaternion.Euler(0, -45, 0) * filteredHit.normal;
+            Debug.DrawRay(Camera.main.transform.position, surfaceParallel * 20, Color.red, 1f);
+
+            if (filteredHit.distance > wallRunSnapDistance)
+            {
+                jState = JumpState.InAir;
+                p_rigidbody.useGravity = true;
+            }
+
         }
+
+
+
+        
     }
 
     private void processButtonInput()
@@ -99,12 +117,19 @@ public class Player_Controller : MonoBehaviour {
         {
             shoot();
         }
+
+        if (Input.GetButtonDown("Jump") && groundTest())
+        {
+            Rigid.AddForce(Vector3.up * JumpForce);
+            jState = JumpState.InAir;
+        }
+
         if (Input.GetButtonDown("Jump") && jState == JumpState.InAir && CanWallRun() && jState != JumpState.Wallrunning)
         {
             jState = JumpState.Wallrunning;
             //Debug.Log(p_rigidbody.velocity.to)
-            p_rigidbody.velocity = Vector3.Scale(p_rigidbody.velocity, new Vector3(1, 0, 1));
-            p_rigidbody.useGravity = false;
+            p_rigidbody.velocity = new Vector3(p_rigidbody.velocity.x, 0, p_rigidbody.velocity.z);
+            //p_rigidbody.useGravity = false;
         }
 
     }
@@ -178,13 +203,12 @@ public class Player_Controller : MonoBehaviour {
         {
             Vector3 VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
             Vector3 HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
+
+            
             //Rigid.MovePosition(transform.position + VShift + HShift);
-            Rigid.AddForce(Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f)); 
-            if (Input.GetButtonDown("Jump") && groundTest())
-            {
-                Rigid.AddForce(transform.up * JumpForce);
-                jState = JumpState.InAir;
-            }
+            Rigid.AddForce(Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
+            Rigid.velocity = new Vector3(Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).x, Rigid.velocity.y, Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).z);
+            
         }
 
         //Invoke("groundTest", .3f);
@@ -227,6 +251,6 @@ public class Player_Controller : MonoBehaviour {
         rotation.x = Mathf.Clamp(rotation.x, -90, 90);
         rotation.y += Input.GetAxis("Mouse X") * MouseSensitivity;
         //rotation.y = Mathf.Clamp(rotation.y, 0, 90);
-        Camera.main.transform.eulerAngles = (Vector2)rotation * MouseSensitivity;
+        Camera.main.transform.eulerAngles = (Vector2)rotation;
     }
 }
