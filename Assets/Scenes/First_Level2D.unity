@@ -401,8 +401,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MouseSensitivity: 0
   MoveSpeed: 10
-  JumpForce: 1
-  groundCheckDistance: 0
+  JumpForce: 400
+  groundCheckDistance: 1.0001
   wallRunSnapDistance: 0
   MaxMoveSpeed: 10
   is3D: 0
