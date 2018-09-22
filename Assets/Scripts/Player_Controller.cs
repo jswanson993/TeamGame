@@ -34,6 +34,7 @@ public class Player_Controller : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         playerCanJump = true;
         shotPoint = transform.Find("Camera/FP_Gun/Gun/FirePoint");
+        is3D = true;
 
     }
 	
