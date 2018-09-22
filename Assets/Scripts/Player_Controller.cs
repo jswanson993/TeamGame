@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour {
 
-
-    public Rigidbody Rigid;
+    [Header("Player Movement")] [Space(15)]
     public float MouseSensitivity;
     public float MoveSpeed;
     public float JumpForce;
@@ -14,10 +13,14 @@ public class Player_Controller : MonoBehaviour {
     public float wallRunSnapDistance;
     public float MaxMoveSpeed;
     static bool playerCanJump;
-    Vector2 rotation = new Vector2(0, 0);
-    Transform shotPoint;
+
+    private Rigidbody Rigid;
+    private Vector2 rotation = new Vector2(0, 0);
+    private Transform shotPoint;
     private Vector3 wallRunVector;
-    Rigidbody p_rigidbody;
+    private Rigidbody p_rigidbody;
+
+    public static bool is3D;
 
     public enum JumpState {Grounded, InAir, Wallrunning};
     JumpState jState;
@@ -56,9 +59,9 @@ public class Player_Controller : MonoBehaviour {
 
     void FixedUpdate()
     {
-        processMovementInput();
+        if (is3D) { processFPMovementInput(); }
+        else { process2DMovementInput(); }
     }
-
 
     private void wallRun()
     {
@@ -200,7 +203,7 @@ public class Player_Controller : MonoBehaviour {
         GetComponent<LineRenderer>().enabled = false;
     }
 
-    private void processMovementInput()
+    private void processFPMovementInput()
     {
         TestRotation();
 
@@ -223,6 +226,20 @@ public class Player_Controller : MonoBehaviour {
         
         
 
+    }
+
+    private void process2DMovementInput()
+    {
+        if (jState != JumpState.Wallrunning)
+        {
+            float Shift = Input.GetAxis("Vertical") * MoveSpeed;
+            
+
+            
+            Debug.Log(Shift.ToString());
+            Rigid.velocity = new Vector3(Shift, Rigid.velocity.y, 0);
+
+        }
     }
 
     private bool groundTest()

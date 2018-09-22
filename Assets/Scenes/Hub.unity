@@ -1120,36 +1120,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 54521210090078892, guid: 323e519e36d6b3a4fa1200f8388e31c6,
-        type: 2}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114204978622690978, guid: 323e519e36d6b3a4fa1200f8388e31c6,
-        type: 2}
-      propertyPath: MaxMoveSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114204978622690978, guid: 323e519e36d6b3a4fa1200f8388e31c6,
-        type: 2}
-      propertyPath: wallRunSnapDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114204978622690978, guid: 323e519e36d6b3a4fa1200f8388e31c6,
-        type: 2}
-      propertyPath: MoveSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114204978622690978, guid: 323e519e36d6b3a4fa1200f8388e31c6,
-        type: 2}
-      propertyPath: MouseSensitivity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114204978622690978, guid: 323e519e36d6b3a4fa1200f8388e31c6,
-        type: 2}
-      propertyPath: groundCheckDistance
-      value: 1.00001
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 323e519e36d6b3a4fa1200f8388e31c6, type: 2}
   m_IsPrefabAsset: 0
