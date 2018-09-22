@@ -20,7 +20,7 @@ public class Player_Controller : MonoBehaviour {
     private Vector3 wallRunVector;
     private Rigidbody p_rigidbody;
 
-    public static bool is3D;
+    public bool is3D = true;
 
     public enum JumpState {Grounded, InAir, Wallrunning};
     JumpState jState;
@@ -34,7 +34,7 @@ public class Player_Controller : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         playerCanJump = true;
         shotPoint = transform.Find("Camera/FP_Gun/Gun/FirePoint");
-        is3D = true;
+        //is3D = true;
 
     }
 	
@@ -233,7 +233,7 @@ public class Player_Controller : MonoBehaviour {
     {
         if (jState != JumpState.Wallrunning)
         {
-            float Shift = Input.GetAxis("Vertical") * MoveSpeed;
+            float Shift = Input.GetAxis("Horizontal") * MoveSpeed;
             
 
             
