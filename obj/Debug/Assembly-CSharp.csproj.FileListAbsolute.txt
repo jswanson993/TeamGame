@@ -1,2 +1,4 @@
 G:\Unity Projects\Team Game\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
 G:\Unity Projects\Team Game\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+G:\Unity Projects\TeamGame\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+G:\Unity Projects\TeamGame\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
