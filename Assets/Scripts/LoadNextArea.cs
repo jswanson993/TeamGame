@@ -10,7 +10,7 @@ public class LoadNextArea : MonoBehaviour {
 
 
 
-    void OnTriggerEnter (Collision collision) {
+    void OnTriggerEnter (Collider collision) {
         //if (collision.collider.gameObject.tag == "Player") {
             SceneManager.LoadScene(scene);
            
