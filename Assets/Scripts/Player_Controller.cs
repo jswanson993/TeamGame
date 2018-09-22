@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour {
 
-
-    public Rigidbody Rigid;
+    [Header("Player Movement")] [Space(15)]
     public float MouseSensitivity;
     public float MoveSpeed;
     public float JumpForce;
@@ -14,10 +13,14 @@ public class Player_Controller : MonoBehaviour {
     public float wallRunSnapDistance;
     public float MaxMoveSpeed;
     static bool playerCanJump;
-    Vector2 rotation = new Vector2(0, 0);
-    Transform shotPoint;
+
+    private Rigidbody Rigid;
+    private Vector2 rotation = new Vector2(0, 0);
+    private Transform shotPoint;
     private Vector3 wallRunVector;
-    Rigidbody p_rigidbody;
+    private Rigidbody p_rigidbody;
+
+    public static bool is3D;
 
     public enum JumpState {Grounded, InAir, Wallrunning};
     JumpState jState;
@@ -31,6 +34,7 @@ public class Player_Controller : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         playerCanJump = true;
         shotPoint = transform.Find("Camera/FP_Gun/Gun/FirePoint");
+        is3D = true;
 
     }
 	
@@ -40,6 +44,7 @@ public class Player_Controller : MonoBehaviour {
         
         processButtonInput();
 
+        /*
         if(jState == JumpState.Wallrunning)
         {
             wallRun();
@@ -48,14 +53,16 @@ public class Player_Controller : MonoBehaviour {
         {
             groundTest();
         }
+        */
+        groundTest();
         Debug.Log(jState.ToString());
 	}
 
     void FixedUpdate()
     {
-        processMovementInput();
+        if (is3D) { processFPMovementInput(); }
+        else { process2DMovementInput(); }
     }
-
 
     private void wallRun()
     {
@@ -124,6 +131,7 @@ public class Player_Controller : MonoBehaviour {
             jState = JumpState.InAir;
         }
 
+        /*
         if (Input.GetButtonDown("Jump") && jState == JumpState.InAir && CanWallRun() && jState != JumpState.Wallrunning)
         {
             jState = JumpState.Wallrunning;
@@ -131,6 +139,7 @@ public class Player_Controller : MonoBehaviour {
             p_rigidbody.velocity = new Vector3(p_rigidbody.velocity.x, 0, p_rigidbody.velocity.z);
             //p_rigidbody.useGravity = false;
         }
+        */
 
     }
 
@@ -195,7 +204,7 @@ public class Player_Controller : MonoBehaviour {
         GetComponent<LineRenderer>().enabled = false;
     }
 
-    private void processMovementInput()
+    private void processFPMovementInput()
     {
         TestRotation();
 
@@ -204,17 +213,34 @@ public class Player_Controller : MonoBehaviour {
             Vector3 VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
             Vector3 HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
 
-            
+
             //Rigid.MovePosition(transform.position + VShift + HShift);
-            Rigid.AddForce(Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
-            Rigid.velocity = new Vector3(Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).x, Rigid.velocity.y, Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).z);
-            
+            //Rigid.AddForce(Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
+            //Rigid.velocity = new Vector3(Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).x, Rigid.velocity.y, Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).z);
+            Vector3 moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
+            Debug.Log(moveVec.ToString());
+            Rigid.velocity = new Vector3(moveVec.x, Rigid.velocity.y, moveVec.z);
+
         }
 
         //Invoke("groundTest", .3f);
         
         
 
+    }
+
+    private void process2DMovementInput()
+    {
+        if (jState != JumpState.Wallrunning)
+        {
+            float Shift = Input.GetAxis("Vertical") * MoveSpeed;
+            
+
+            
+            Debug.Log(Shift.ToString());
+            Rigid.velocity = new Vector3(Shift, Rigid.velocity.y, 0);
+
+        }
     }
 
     private bool groundTest()
