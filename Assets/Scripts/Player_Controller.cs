@@ -129,6 +129,7 @@ public class Player_Controller : MonoBehaviour {
         {
             Rigid.AddForce(Vector3.up * JumpForce);
             jState = JumpState.InAir;
+            Debug.Log("Jump");
         }
 
         /*
@@ -237,7 +238,7 @@ public class Player_Controller : MonoBehaviour {
             
 
             
-            Debug.Log(Shift.ToString());
+            //Debug.Log(Shift.ToString());
             Rigid.velocity = new Vector3(Shift, Rigid.velocity.y, 0);
 
         }
