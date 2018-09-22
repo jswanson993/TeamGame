@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 
 public class LoadNextArea : MonoBehaviour {
 
     public string scene;
-    public bool isActive = false;
-    
 
-    private void OnCollisionEnter(Collision collision) {
-        if (isActive) {
-            EditorSceneManager.LoadScene(scene);
-        }
+
+
+    void OnTriggerEnter (Collision collision) {
+        //if (collision.collider.gameObject.tag == "Player") {
+            SceneManager.LoadScene(scene);
+           
+        //}
     }
+
+
 }
