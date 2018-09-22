@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 136449337256372132}
   m_Layer: 18
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -399,6 +399,7 @@ MonoBehaviour:
   groundCheckDistance: 1.00001
   wallRunSnapDistance: 5
   MaxMoveSpeed: 5
+  is3D: 1
 --- !u!120 &120516533602357772
 LineRenderer:
   m_ObjectHideFlags: 1

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class LoadNextArea : MonoBehaviour {
 
     public string scene;
+<<<<<<< HEAD
 
 
 
@@ -15,6 +16,16 @@ public class LoadNextArea : MonoBehaviour {
             SceneManager.LoadScene(scene);
            
         //}
+=======
+
+
+
+    void OnTriggerEnter (Collider col) {
+        if (col.gameObject.tag == "Player") {
+            SceneManager.LoadScene(scene);
+           
+        }
+>>>>>>> 8fe63884966738f0152d6e9d57a490298e045022
     }
 
 
