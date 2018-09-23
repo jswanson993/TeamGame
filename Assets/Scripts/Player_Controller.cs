@@ -129,6 +129,7 @@ public class Player_Controller : MonoBehaviour {
         {
             Rigid.AddForce(Vector3.up * JumpForce);
             jState = JumpState.InAir;
+            Debug.Log("Jump");
         }
 
         /*
@@ -218,7 +219,7 @@ public class Player_Controller : MonoBehaviour {
             //Rigid.AddForce(Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
             //Rigid.velocity = new Vector3(Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).x, Rigid.velocity.y, Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).z);
             Vector3 moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
-            Debug.Log(moveVec.ToString());
+            //Debug.Log(moveVec.ToString());
             Rigid.velocity = new Vector3(moveVec.x, Rigid.velocity.y, moveVec.z);
 
         }
@@ -237,7 +238,7 @@ public class Player_Controller : MonoBehaviour {
             
 
             
-            Debug.Log(Shift.ToString());
+            //Debug.Log(Shift.ToString());
             Rigid.velocity = new Vector3(Shift, Rigid.velocity.y, 0);
 
         }
