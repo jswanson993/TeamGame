@@ -20,6 +20,8 @@ public class Player_Controller : MonoBehaviour {
     public Transform shotPoint;
     private Vector3 wallRunVector;
     private Rigidbody p_rigidbody;
+    public GameObject FPGUN;
+    public GameObject GUN;
 
     public bool is3D = true;
 
@@ -34,6 +36,9 @@ public class Player_Controller : MonoBehaviour {
         Rigid = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         playerCanJump = true;
+        FPGUN = GameObject.Find("FP_Gun");
+        GUN = GameObject.Find("Gun");
+
         if (hasGun) {
             if (is3D) {
                 GameObject.Find("FP_Gun").SetActive(true);
@@ -134,7 +139,7 @@ public class Player_Controller : MonoBehaviour {
 
     private void processButtonInput()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && hasGun)
         {
             if (is3D) {
                 shoot();
@@ -200,6 +205,7 @@ public class Player_Controller : MonoBehaviour {
                 if (hitReciever) {
                     hitReciever.InvokeTrigger();
                 }
+                
 
             }
             /*
@@ -228,12 +234,15 @@ public class Player_Controller : MonoBehaviour {
     }
 
     private void shoot2D() {
+        int layerMask = 1 << 11;
+        layerMask = ~layerMask;
         Vector3 endpoint;
         RaycastHit hit;
-        if(Physics.Raycast(shotPoint.position, transform.TransformDirection(shotPoint.forward), out hit, Mathf.Infinity)) {
-            Debug.DrawRay(shotPoint.position, shotPoint.forward * hit.distance, Color.red);
+        if(Physics.Raycast(shotPoint.position, shotPoint.forward, out hit, Mathf.Infinity, layerMask)) {
+            Debug.DrawRay(shotPoint.position, shotPoint.forward * hit.distance, Color.red, 1f);
             endpoint = hit.point;
-
+            Debug.Log("RayHit");
+            Debug.Log(hit.transform.name);
             if (hit.collider.isTrigger) {
                 var hitReciever = hit.collider.gameObject.GetComponent<HitTrigger>();
                 if (hitReciever) {
@@ -245,6 +254,7 @@ public class Player_Controller : MonoBehaviour {
         } else {
             Debug.DrawRay(shotPoint.position, transform.TransformDirection(shotPoint.forward) * 1000, Color.white);
             endpoint = transform.TransformDirection(shotPoint.forward) * 1000;
+            Debug.Log("RayMissed");
         }
 
         GetComponent<LineRenderer>().enabled = true;
@@ -343,12 +353,21 @@ public class Player_Controller : MonoBehaviour {
     }
 
     public void getPickup(System.String pickup) {
-        if(pickup == "Gun Pickup") {
+        if (pickup == "Gun Pickup")
+        {
             hasGun = true;
-            GameObject gun = GameObject.FindGameObjectWithTag("Gun");
-            gun.SetActive(true);
-            
-            
+            //GameObject gun = GameObject.Find("Gun");
+            if (!is3D)
+            {
+                GUN.SetActive(true);
+            }
+            else
+            {
+                FPGUN.SetActive(true);
+            }
         }
+
+
+            
     }
 }
