@@ -235,6 +235,8 @@ MonoBehaviour:
   wallRunSnapDistance: 0
   MaxMoveSpeed: 10
   shotPoint: {fileID: 4584606657572000}
+  FPGUN: {fileID: 0}
+  GUN: {fileID: 0}
   is3D: 0
 --- !u!120 &120346404265891746
 LineRenderer:
@@ -334,7 +336,7 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1856755762473786}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 77760d2bf52e5b840a275c32b52fdcbf, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
