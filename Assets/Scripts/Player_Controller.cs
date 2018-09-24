@@ -35,6 +35,7 @@ public class Player_Controller : MonoBehaviour {
         jState = JumpState.Grounded;
         Rigid = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         playerCanJump = true;
         FPGUN = GameObject.Find("FP_Gun");
         GUN = GameObject.Find("Gun");
