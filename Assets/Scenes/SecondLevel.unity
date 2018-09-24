@@ -317,7 +317,7 @@ Prefab:
     - target: {fileID: 114606040133288860, guid: 8578ba65044abf843af2b07ac3084756,
         type: 2}
       propertyPath: scene
-      value: First_Level2D
+      value: Hub
       objectReference: {fileID: 0}
     - target: {fileID: 65546848687455486, guid: 8578ba65044abf843af2b07ac3084756,
         type: 2}
@@ -365,6 +365,10 @@ Prefab:
     - target: {fileID: 4717845214290290, guid: 323e519e36d6b3a4fa1200f8388e31c6, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828045127570740, guid: 323e519e36d6b3a4fa1200f8388e31c6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 323e519e36d6b3a4fa1200f8388e31c6, type: 2}

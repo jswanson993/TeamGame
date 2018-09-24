@@ -13,10 +13,11 @@ public class Player_Controller : MonoBehaviour {
     public float wallRunSnapDistance;
     public float MaxMoveSpeed;
     static bool playerCanJump;
+    public static bool hasGun;
 
     private Rigidbody Rigid;
     private Vector2 rotation = new Vector2(0, 0);
-    private Transform shotPoint;
+    public Transform shotPoint;
     private Vector3 wallRunVector;
     private Rigidbody p_rigidbody;
 
@@ -33,7 +34,20 @@ public class Player_Controller : MonoBehaviour {
         Rigid = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         playerCanJump = true;
-        shotPoint = transform.Find("Camera/FP_Gun/Gun/FirePoint");
+        if (hasGun) {
+            if (is3D) {
+                GameObject.Find("FP_Gun").SetActive(true);
+            } else {
+                GameObject.Find("Gun").SetActive(true);
+            }
+        } else {
+            if (is3D) {
+                GameObject.Find("FP_Gun").SetActive(false);
+            } else {
+                GameObject.Find("Gun").SetActive(false);
+            }
+        }
+        //shotPoint = transform.Find("Camera/FP_Gun/Gun/FirePoint");
         //is3D = true;
 
     }
@@ -122,7 +136,11 @@ public class Player_Controller : MonoBehaviour {
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            shoot();
+            if (is3D) {
+                shoot();
+            } else {
+                shoot2D();
+            }
         }
 
         if (Input.GetButtonDown("Jump") && groundTest())
@@ -177,11 +195,18 @@ public class Player_Controller : MonoBehaviour {
             Debug.DrawRay(Camera.main.transform.position, (Camera.main.transform.forward) * hit.distance, Color.yellow);
             Debug.Log("Did Hit");
             endpoint = hit.point;
-            ////*
+            if (hit.collider.isTrigger) {
+                var hitReciever = hit.collider.gameObject.GetComponent<HitTrigger>();
+                if (hitReciever) {
+                    hitReciever.InvokeTrigger();
+                }
+
+            }
+            /*
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cube.transform.position = endpoint;
             Destroy(cube, 1);
-            ///*/
+            */
 
         }
         else
@@ -194,12 +219,38 @@ public class Player_Controller : MonoBehaviour {
         GetComponent<LineRenderer>().enabled = true;
         GetComponent<LineRenderer>().SetPositions(new Vector3[] {shotPoint.position, endpoint});
         Invoke("RemoveTrail", .06f);
-        ///*
+        /*
         GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube2.transform.position = endpoint;
         Destroy(cube2, 1);
-        ///*/
+        */
 
+    }
+
+    private void shoot2D() {
+        Vector3 endpoint;
+        RaycastHit hit;
+        if(Physics.Raycast(shotPoint.position, transform.TransformDirection(shotPoint.forward), out hit, Mathf.Infinity)) {
+            Debug.DrawRay(shotPoint.position, shotPoint.forward * hit.distance, Color.red);
+            endpoint = hit.point;
+
+            if (hit.collider.isTrigger) {
+                var hitReciever = hit.collider.gameObject.GetComponent<HitTrigger>();
+                if (hitReciever) {
+                    hitReciever.InvokeTrigger();
+                }
+
+            }
+
+        } else {
+            Debug.DrawRay(shotPoint.position, transform.TransformDirection(shotPoint.forward) * 1000, Color.white);
+            endpoint = transform.TransformDirection(shotPoint.forward) * 1000;
+        }
+
+        GetComponent<LineRenderer>().enabled = true;
+        GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
+        Invoke("RemoveTrail", .06f);
+        ///*
     }
 
     private void RemoveTrail()
@@ -237,7 +288,15 @@ public class Player_Controller : MonoBehaviour {
         if (jState != JumpState.Wallrunning)
         {
             float Shift = Input.GetAxis("Horizontal") * MoveSpeed;
-            
+           
+            //Changes the rotation of the player based on the direction they are moving
+            if (Shift > 0) {
+                this.transform.rotation = Quaternion.Euler(0, 0, 0);
+                //shotPoint.transform.rotation = Quaternion.Euler(0, 90, 0);
+            } else if (Shift < 0) {
+               this.transform.rotation = Quaternion.Euler(0, 180, 0);
+                //shotPoint.transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
 
             
             //Debug.Log(Shift.ToString());
@@ -281,5 +340,15 @@ public class Player_Controller : MonoBehaviour {
         rotation.y += Input.GetAxis("Mouse X") * MouseSensitivity;
         //rotation.y = Mathf.Clamp(rotation.y, 0, 90);
         Camera.main.transform.eulerAngles = (Vector2)rotation;
+    }
+
+    public void getPickup(System.String pickup) {
+        if(pickup == "Gun Pickup") {
+            hasGun = true;
+            GameObject gun = GameObject.FindGameObjectWithTag("Gun");
+            gun.SetActive(true);
+            
+            
+        }
     }
 }

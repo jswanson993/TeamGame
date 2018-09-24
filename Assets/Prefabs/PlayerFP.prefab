@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 4766602394212428}
   m_Layer: 0
   m_Name: FP_Gun
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4073532929739000
 Transform:
   m_ObjectHideFlags: 1
@@ -399,6 +399,7 @@ MonoBehaviour:
   groundCheckDistance: 1.2
   wallRunSnapDistance: 5
   MaxMoveSpeed: 5
+  shotPoint: {fileID: 4073532929739000}
   is3D: 1
 --- !u!120 &120516533602357772
 LineRenderer:

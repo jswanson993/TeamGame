@@ -7,15 +7,8 @@ public class HitTrigger : MonoBehaviour {
 
     public UnityEvent triggerEffect;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+
 
     public void hitTrigger() {
         InvokeTrigger();
