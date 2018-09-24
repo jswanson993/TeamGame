@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\LoadNextArea.cs" />
      <Compile Include="Assets\Scripts\Player_Controller.cs" />
      <Compile Include="Assets\Scripts\ShotTriggerInteractable.cs" />
+     <Compile Include="Assets\SimpleFollow2d.cs" />
      <None Include="Assets\Forceling\ForcelingWorldSpaceGrid\Forceling_WorldSpaceGrid.shader" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/GIT/TradGameDev/TeamGame/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

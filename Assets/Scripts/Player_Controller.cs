@@ -127,6 +127,8 @@ public class Player_Controller : MonoBehaviour {
 
         if (Input.GetButtonDown("Jump") && groundTest())
         {
+            Vector3 haltVel = new Vector3(p_rigidbody.velocity.x, 0, p_rigidbody.velocity.z);
+            p_rigidbody.velocity = haltVel;
             Rigid.AddForce(Vector3.up * JumpForce);
             jState = JumpState.InAir;
             Debug.Log("Jump");

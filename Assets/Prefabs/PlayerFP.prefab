@@ -396,7 +396,7 @@ MonoBehaviour:
   MouseSensitivity: 2
   MoveSpeed: 3
   JumpForce: 410
-  groundCheckDistance: 1.00001
+  groundCheckDistance: 1.2
   wallRunSnapDistance: 5
   MaxMoveSpeed: 5
   is3D: 1
