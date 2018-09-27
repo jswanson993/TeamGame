@@ -15,7 +15,11 @@ public class Player_Controller : MonoBehaviour {
     public float maxAirSpeed;
     static bool playerCanJump;
     public static bool hasGun;
+    public static bool hasGrapple;
+    public float grappleDistance = 100;
+    public float grappleSpeed = 10;
 
+    private bool blocked;
     public Rigidbody Rigid;
     private Vector2 rotation = new Vector2(0, 0);
     public Transform shotPoint;
@@ -56,6 +60,8 @@ public class Player_Controller : MonoBehaviour {
                 GameObject.Find("Gun").SetActive(false);
             }
         }
+        //Change this after done implementing
+        hasGrapple = true;
         //shotPoint = transform.Find("Camera/FP_Gun/Gun/FirePoint");
         //is3D = true;
 
@@ -152,6 +158,14 @@ public class Player_Controller : MonoBehaviour {
                 shoot();
             } else {
                 shoot2D();
+            }
+        }
+
+        if(Input.GetButtonDown("Fire2") && hasGrapple) {
+            if (is3D) {
+                grapple();
+            } else {
+                grapple2D();
             }
         }
 
@@ -268,6 +282,34 @@ public class Player_Controller : MonoBehaviour {
         GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
         Invoke("RemoveTrail", .06f);
         ///*
+    }
+
+    private void grapple() {
+        Vector3 endpoint;
+
+        RaycastHit hit;
+        Vector3 currentPos = Camera.main.transform.position;
+        if(Physics.Raycast(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward), out hit, Mathf.Infinity)) {
+            endpoint = hit.point;
+            Debug.DrawRay(Camera.main.transform.position, (Camera.main.transform.forward) * hit.distance, Color.yellow);
+
+            if (Math.Abs(endpoint.x - currentPos.x) <= grappleDistance && Math.Abs(endpoint.y - currentPos.y) <= grappleDistance && Math.Abs(endpoint.z - currentPos.z) <= grappleDistance) {
+                
+                
+            }
+        } else {
+            Debug.DrawRay(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward) * 1000, Color.white);
+            Debug.Log("Did not Hit");
+            endpoint = transform.TransformDirection(Camera.main.transform.forward) * 1000;
+        }
+        GetComponent<LineRenderer>().enabled = true;
+        GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
+        Invoke("RemoveTrail", .06f);
+
+    }
+
+    private void grapple2D() {
+
     }
 
     private void RemoveTrail()
@@ -417,5 +459,13 @@ public class Player_Controller : MonoBehaviour {
     public void cameraTilt(Transform wall)
     {
         //if(transform)
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        blocked = true;
+    }
+
+    private void OnCollisionExit(Collision collision) {
+        blocked = false;
     }
 }
