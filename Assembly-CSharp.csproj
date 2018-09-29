@@ -109,6 +109,7 @@
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
     <Compile Include="Assets\Scripts\Camera2dFollow.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Grapple.cs" />
     <Compile Include="Assets\Scripts\HitTrigger.cs" />
     <Compile Include="Assets\Scripts\LoadNextArea.cs" />
     <Compile Include="Assets\Scripts\Pickup.cs" />
