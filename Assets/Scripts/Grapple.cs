@@ -16,6 +16,7 @@ public class Grapple : MonoBehaviour {
     private Vector3 endpoint;
     private Vector3 currentPos;
     private bool leftSurface;
+    private int count = 0;
 
     // Use this for initialization
     void Start () {
@@ -45,9 +46,18 @@ public class Grapple : MonoBehaviour {
         }
 
         if (fired) {
-            if (is3D) {
+            if (is3D) {  
                 //Moves the player to the point of where they grappled
                 this.transform.Translate(forwardPos * Time.deltaTime * grappleSpeed);
+                count++;
+                //Checks to see if you fired at the same surface you are on
+                if (count == 3) {
+                    if (!leftSurface) {
+                        fired = false;
+                    }
+                    count = 0;
+                }
+                
             } else {
                 //grapple2D();
             }
@@ -88,10 +98,8 @@ public class Grapple : MonoBehaviour {
         }
         leftSurface = false;
     }
-
     private void OnCollisionExit(Collision collision) {
         leftSurface = true;
     }
-
 
 }
