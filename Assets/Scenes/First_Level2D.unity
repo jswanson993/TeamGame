@@ -178,7 +178,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &37373020
 GameObject:
@@ -931,34 +931,25 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5cd8dca0ee128b44a78a89c24a5b60e, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &742273925
+--- !u!1 &697091532 stripped
 GameObject:
+  m_CorrespondingSourceObject: {fileID: 1856755762473786, guid: b5cd8dca0ee128b44a78a89c24a5b60e,
+    type: 2}
+  m_PrefabInternal: {fileID: 626013464}
+--- !u!114 &697091533
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 1942977581}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 742273926}
-  m_Layer: 0
-  m_Name: Missing Prefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &742273926
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 1942977581}
-  m_GameObject: {fileID: 742273925}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 697091532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e3453a264614247b62ca35d5a6a02c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grappleDistance: 100
+  grappleSpeed: 50
+  shotPoint: {fileID: 918444367}
 --- !u!1 &775219691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +1027,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &775219695
 MonoBehaviour:
@@ -1063,6 +1054,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: d7abc5f1f8ac48f43b9dcf3973d0c245, type: 2}
+--- !u!4 &918444367 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4584606657572000, guid: b5cd8dca0ee128b44a78a89c24a5b60e,
+    type: 2}
+  m_PrefabInternal: {fileID: 626013464}
 --- !u!1 &976254952
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,34 +1365,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1190230073
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 1357983365}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1190230074}
-  m_Layer: 0
-  m_Name: Missing Prefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1190230074
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 1357983365}
-  m_GameObject: {fileID: 1190230073}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1297493993
 GameObject:
@@ -2014,7 +1982,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280031243510876, guid: 8acb44d9caa864f45866a48632be2d38, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114184636736845964, guid: 8acb44d9caa864f45866a48632be2d38,
         type: 2}
@@ -2241,7 +2209,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4222501126483834, guid: 1882dc40209340b4995b7d62d7718420, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1882dc40209340b4995b7d62d7718420, type: 2}
