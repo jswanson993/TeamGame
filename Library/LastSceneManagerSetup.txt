@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Mechanictest.unity
+- path: Assets/Scenes/First_Level2D.unity
   isLoaded: 1
   isActive: 1
