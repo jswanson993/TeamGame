@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Mechanictest.unity
+- path: Assets/Scenes/L3WB.unity
   isLoaded: 1
   isActive: 1

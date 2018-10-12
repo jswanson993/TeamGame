@@ -28,6 +28,8 @@ public class Grapple : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //forwardPos = shotPoint.forward;
+        //Debug.Log("shot point transform updated");
         if (Input.GetButtonDown("Fire2") && hasGrapple) {
             if (!fired) {
                 if (is3D) {
@@ -43,6 +45,7 @@ public class Grapple : MonoBehaviour {
                     } else {
                         
                         forwardPos = shotPoint.forward;
+                        
                     }
                     GetComponent<Rigidbody>().useGravity = false;
                     
@@ -53,6 +56,8 @@ public class Grapple : MonoBehaviour {
 
         }
 
+        Debug.DrawRay(transform.position, forwardPos);
+
         if (fired) {
             if (is3D) {  
                 //Moves the player to the point of where they grappled
@@ -62,7 +67,8 @@ public class Grapple : MonoBehaviour {
                 
                 
             } else {
-                this.transform.Translate(forwardPos * Time.deltaTime * grappleSpeed);
+                this.transform.Translate(forwardPos * Time.deltaTime * grappleSpeed, Space.World);
+                Debug.DrawRay(transform.position, forwardPos * 4, Color.cyan, 1f);
             }
         } else {
             GetComponent<Rigidbody>().useGravity = true;

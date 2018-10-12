@@ -310,7 +310,7 @@ public class Player_Controller : MonoBehaviour {
 
         else if (jState == JumpState.InAir)
         {
-
+            /*
             VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
             HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
             //if (Math.Abs(Input.GetAxis("Vertical")) > .01f) { VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed/2; }
@@ -324,7 +324,26 @@ public class Player_Controller : MonoBehaviour {
             //Vector3 TempVec = Vector3.Normalize(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.y)) * Rigid.velocity.magnitude;
             //Debug.DrawRay(transform.position, TempVec);
             //Rigid.velocity = new Vector3(TempVec.x, Rigid.velocity.y, TempVec.z);
+            */
 
+            VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
+            HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
+
+
+            //Rigid.MovePosition(transform.position + VShift + HShift);
+            //Rigid.AddForce(Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
+            //Rigid.velocity = new Vector3(Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).x, Rigid.velocity.y, Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).z);
+            Vector3 moveVec;
+            if (!isWallLeaping)
+            {
+                moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * maxAirSpeed);
+            }
+            else
+            {
+                moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, Mathf.Infinity) * maxAirSpeed);
+            }
+
+            Rigid.velocity = new Vector3(moveVec.x, Rigid.velocity.y, moveVec.z);
 
         }
 
