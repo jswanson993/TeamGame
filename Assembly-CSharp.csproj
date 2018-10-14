@@ -108,6 +108,7 @@
      <Compile Include="Assets\Scripts\Player_Controller.cs" />
      <Compile Include="Assets\Scripts\ShotTriggerInteractable.cs" />
      <Compile Include="Assets\SimpleFollow2d.cs" />
+     <Compile Include="Assets\Wallrun.cs" />
      <Compile Include="Assets\WallRunTrigger.cs" />
      <Compile Include="Assets\WallRunTriggerGizmos.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />

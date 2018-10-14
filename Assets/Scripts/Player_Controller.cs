@@ -342,8 +342,10 @@ public class Player_Controller : MonoBehaviour {
             {
                 moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, Mathf.Infinity) * maxAirSpeed);
             }
-
-            Rigid.velocity = new Vector3(moveVec.x, Rigid.velocity.y, moveVec.z);
+            Vector3 tVel = Vector3.ClampMagnitude(Vector3.ClampMagnitude(new Vector3(moveVec.x, 0, moveVec.z), maxAirSpeed), maxAirSpeed);
+            //Rigid.velocity = Rigid.velocity +new Vector3(tVel.x, 0, tVel.z);
+            if(Vector3.Magnitude(new Vector3(Rigid.velocity.x, 0, Rigid.velocity.z)) < maxAirSpeed)
+                Rigid.AddForce(tVel * 10);
 
         }
 
