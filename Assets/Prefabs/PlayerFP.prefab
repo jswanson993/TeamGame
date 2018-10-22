@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 114204978622690978}
   - component: {fileID: 114386821743688328}
   - component: {fileID: 114412957375630968}
+  - component: {fileID: 114139265905091934}
   m_Layer: 0
   m_Name: PlayerFP
   m_TagString: Player
@@ -385,6 +386,28 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472567399405010}
   m_Enabled: 1
+--- !u!114 &114139265905091934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828045127570740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5921f9c96fece46a9984b26dc59569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHP: 100
+  damageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114204978622690978
 MonoBehaviour:
   m_ObjectHideFlags: 1
