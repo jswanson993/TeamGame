@@ -57,6 +57,11 @@ public class Player_Controller : MonoBehaviour {
             }
         }
 
+        if (!is3D) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+
         //shotPoint = transform.Find("Camera/FP_Gun/Gun/FirePoint");
         //is3D = true;
 
@@ -88,7 +93,9 @@ public class Player_Controller : MonoBehaviour {
     void FixedUpdate()
     {
         if (is3D) { processFPMovementInput(); }
-        else { process2DMovementInput(); }
+        else { process2DMovementInput();
+            aim2d();
+        }
     }
 
     private void wallRun()
@@ -177,6 +184,12 @@ public class Player_Controller : MonoBehaviour {
         }
         */
 
+    }
+
+    private void aim2d() {
+        Quaternion aim = Quaternion.LookRotation(Input.mousePosition, Input.mousePosition);
+        GUN.transform.rotation = aim;
+        //GUN.transform.eulerAngles = new Vector3(0,0,aim.z);
     }
 
     private bool CanWallRun()
