@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 33543563028745418}
   - component: {fileID: 23067345868168190}
   - component: {fileID: 136449337256372132}
-  m_Layer: 18
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -121,6 +121,8 @@ GameObject:
   - component: {fileID: 54521210090078892}
   - component: {fileID: 120516533602357772}
   - component: {fileID: 114204978622690978}
+  - component: {fileID: 114386821743688328}
+  - component: {fileID: 114412957375630968}
   m_Layer: 0
   m_Name: PlayerFP
   m_TagString: Player
@@ -175,7 +177,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1828045127570740}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.9, y: 24.87, z: -318.4}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4641520503502008}
@@ -357,7 +359,7 @@ Rigidbody:
   m_GameObject: {fileID: 1828045127570740}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1.87
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -394,16 +396,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13cdaba983b51084f88415f19bf03aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseSensitivity: 2
-  MoveSpeed: 3
-  JumpForce: 410
+  MouseSensitivity: 2.04
+  MoveSpeed: 4
+  JumpForce: 550
   groundCheckDistance: 1.2
-  wallRunSnapDistance: 5
+  wallRunSnapDistance: 1
   MaxMoveSpeed: 5
+  maxAirSpeed: 10
+  Rigid: {fileID: 0}
   shotPoint: {fileID: 4073532929739000}
   FPGUN: {fileID: 0}
   GUN: {fileID: 0}
+  isWallLeaping: 0
   is3D: 1
+  jState: 0
+--- !u!114 &114386821743688328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828045127570740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e3453a264614247b62ca35d5a6a02c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grappleDistance: 100
+  grappleSpeed: 10
+  shotPoint: {fileID: 0}
+--- !u!114 &114412957375630968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828045127570740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5053f5bd00a9e24d8e5d3832b828dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114770856677793338
 MonoBehaviour:
   m_ObjectHideFlags: 1
