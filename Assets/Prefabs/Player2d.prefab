@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 54341705411656594}
   - component: {fileID: 120346404265891746}
   - component: {fileID: 114612844751117194}
+  - component: {fileID: 114802206007980636}
   m_Layer: 11
   m_Name: Player2d
   m_TagString: Player
@@ -99,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1856755762473786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45.47, y: -2.9695296, z: -1.37}
+  m_LocalPosition: {x: -3.21, y: 0, z: -3.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4146606463730328}
@@ -234,10 +235,25 @@ MonoBehaviour:
   groundCheckDistance: 1.2
   wallRunSnapDistance: 0
   MaxMoveSpeed: 10
+  maxAirSpeed: 10
+  Rigid: {fileID: 0}
   shotPoint: {fileID: 4584606657572000}
   FPGUN: {fileID: 0}
   GUN: {fileID: 0}
+  isWallLeaping: 0
   is3D: 0
+  jState: 0
+--- !u!114 &114802206007980636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1856755762473786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5053f5bd00a9e24d8e5d3832b828dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &120346404265891746
 LineRenderer:
   m_ObjectHideFlags: 1
