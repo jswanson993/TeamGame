@@ -35,13 +35,14 @@ public class Wallrun : MonoBehaviour {
         {
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.right * hit.distance, Color.yellow);
             Debug.Log("Hit Right Side");
-            GetComponent<Rigidbody>().AddForce(-Camera.main.transform.right * 100);
+            GetComponent<Rigidbody>().AddForce(-Camera.main.transform.right * 700 + (Camera.main.transform.up*1000));
         }
 
         else if(Physics.Raycast(Camera.main.transform.position, -Camera.main.transform.right, out hit, p_controller.wallRunSnapDistance, layerMask))
         {
             Debug.DrawRay(Camera.main.transform.position, -Camera.main.transform.right * hit.distance, Color.yellow);
             Debug.Log("Hit Left Side");
+            GetComponent<Rigidbody>().AddForce(Camera.main.transform.right * 700 + (Camera.main.transform.up * 1000));
         }
 
         else
