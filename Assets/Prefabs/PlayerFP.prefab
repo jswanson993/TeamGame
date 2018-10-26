@@ -359,8 +359,8 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1828045127570740}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1.87
+  m_Mass: 3
+  m_Drag: 1
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -421,9 +421,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MouseSensitivity: 2.04
   MoveSpeed: 4
-  JumpForce: 550
+  JumpForce: 1600
   groundCheckDistance: 1.2
-  wallRunSnapDistance: 1
+  wallRunSnapDistance: 1.5
   MaxMoveSpeed: 5
   maxAirSpeed: 10
   Rigid: {fileID: 0}

@@ -1296,7 +1296,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh16720
+  m_Name: pb_Mesh13784
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -1451,7 +1451,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-76636
+  m_Name: pb_Mesh13630
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -25541,6 +25541,7 @@ GameObject:
   - component: {fileID: 633273433}
   - component: {fileID: 633273432}
   - component: {fileID: 633273431}
+  - component: {fileID: 633273435}
   m_Layer: 0
   m_Name: New Game Object (10)
   m_TagString: Untagged
@@ -27936,6 +27937,20 @@ Transform:
   m_Father: {fileID: 1774971747}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &633273435
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 633273430}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 81267003}
 --- !u!43 &663305459
 Mesh:
   m_ObjectHideFlags: 0
@@ -28096,7 +28111,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh13298
+  m_Name: pb_Mesh13712
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -33279,6 +33294,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114386821743688328, guid: 323e519e36d6b3a4fa1200f8388e31c6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 323e519e36d6b3a4fa1200f8388e31c6, type: 2}
   m_IsPrefabAsset: 0
@@ -33293,6 +33313,7 @@ GameObject:
   - component: {fileID: 955524798}
   - component: {fileID: 955524797}
   - component: {fileID: 955524796}
+  - component: {fileID: 955524800}
   m_Layer: 0
   m_Name: New Game Object
   m_TagString: Untagged
@@ -35688,6 +35709,20 @@ Transform:
   m_Father: {fileID: 1774971747}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &955524800
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 955524795}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 705000351}
 --- !u!43 &958278280
 Mesh:
   m_ObjectHideFlags: 0

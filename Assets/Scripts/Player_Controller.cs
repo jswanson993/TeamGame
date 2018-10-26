@@ -321,7 +321,7 @@ public class Player_Controller : MonoBehaviour {
 
         }
 
-        else if (jState == JumpState.InAir)
+        else if (jState == JumpState.InAir || jState == JumpState.Wallrunning)
         {
             /*
             VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;

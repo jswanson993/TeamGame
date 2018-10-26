@@ -53,7 +53,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\GunPickup.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -103,16 +102,17 @@
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\DealDamage.cs" />
      <Compile Include="Assets\Scripts\Grapple.cs" />
+     <Compile Include="Assets\Scripts\GunPickup.cs" />
      <Compile Include="Assets\Scripts\HitTrigger.cs" />
      <Compile Include="Assets\Scripts\LoadNextArea.cs" />
      <Compile Include="Assets\Scripts\Pickup.cs" />
      <Compile Include="Assets\Scripts\Player_Controller.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\ShotTriggerInteractable.cs" />
-     <Compile Include="Assets\SimpleFollow2d.cs" />
-     <Compile Include="Assets\Wallrun.cs" />
-     <Compile Include="Assets\WallRunTrigger.cs" />
-     <Compile Include="Assets\WallRunTriggerGizmos.cs" />
+     <Compile Include="Assets\Scripts\SimpleFollow2d.cs" />
+     <Compile Include="Assets\Scripts\Wallrun.cs" />
+     <Compile Include="Assets\Scripts\WallRunTrigger.cs" />
+     <Compile Include="Assets\Scripts\WallRunTriggerGizmos.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
      <None Include="Assets\PostProcessing\Resources\Shaders\Fog.shader" />
