@@ -16,12 +16,12 @@ public class Grapple : MonoBehaviour {
     private Vector3 endpoint;
     private Vector3 currentPos;
     private bool leftSurface;
-
+    private Player_Controller PlayerController;
     // Use this for initialization
     void Start () {
         //Change this after done implementing
         hasGrapple = true;
-
+        PlayerController = GetComponent<Player_Controller>();
         is3D = GetComponent<Player_Controller>().is3D;
         shotPoint = GetComponent<Player_Controller>().shotPoint;
     }
@@ -70,7 +70,7 @@ public class Grapple : MonoBehaviour {
                 this.transform.Translate(forwardPos * Time.deltaTime * grappleSpeed, Space.World);
                 Debug.DrawRay(transform.position, forwardPos * 4, Color.cyan, 1f);
             }
-        } else {
+        } else if(PlayerController.jState != Player_Controller.JumpState.Wallrunning) {
             GetComponent<Rigidbody>().useGravity = true;
         }
 

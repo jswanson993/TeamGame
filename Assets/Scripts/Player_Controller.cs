@@ -360,6 +360,11 @@ public class Player_Controller : MonoBehaviour {
             if(Vector3.Magnitude(new Vector3(Rigid.velocity.x, 0, Rigid.velocity.z)) < maxAirSpeed)
                 Rigid.AddForce(tVel * 10);
 
+            if(jState == JumpState.Wallrunning && Rigid.velocity.y > 0f)
+            {
+                Rigid.velocity = Vector3.Scale(Rigid.velocity , new Vector3(1, 0, 1));
+            }
+
         }
 
         
