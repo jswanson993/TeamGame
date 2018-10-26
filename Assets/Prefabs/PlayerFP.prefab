@@ -439,7 +439,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1828045127570740}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22e3453a264614247b62ca35d5a6a02c, type: 3}
   m_Name: 
@@ -458,6 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5053f5bd00a9e24d8e5d3832b828dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallJumpForce: 1000
 --- !u!114 &114770856677793338
 MonoBehaviour:
   m_ObjectHideFlags: 1
