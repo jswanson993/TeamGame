@@ -9,7 +9,7 @@ public class Grapple : MonoBehaviour {
     public float grappleDistance = 100;
     public float grappleSpeed = 10;
     bool is3D;
-    private bool fired = false;
+    public bool fired = false;
     public Transform shotPoint;
     private Vector3 forwardPos;
     private bool collided;
@@ -17,6 +17,7 @@ public class Grapple : MonoBehaviour {
     private Vector3 currentPos;
     private bool leftSurface;
     private Player_Controller PlayerController;
+    private Rigidbody playerRB;
     // Use this for initialization
     void Start () {
         //Change this after done implementing
@@ -24,6 +25,7 @@ public class Grapple : MonoBehaviour {
         PlayerController = GetComponent<Player_Controller>();
         is3D = GetComponent<Player_Controller>().is3D;
         shotPoint = GetComponent<Player_Controller>().shotPoint;
+        playerRB = GetComponent<Rigidbody>();
     }
 	
 	// Update is called once per frame
@@ -32,6 +34,7 @@ public class Grapple : MonoBehaviour {
         //Debug.Log("shot point transform updated");
         if (Input.GetButtonDown("Fire2") && hasGrapple) {
             if (!fired) {
+                
                 if (is3D) {
                     grapple();
                 } else {
@@ -52,6 +55,7 @@ public class Grapple : MonoBehaviour {
                 }
             } else {
                 fired = false;
+                GetComponent<LineRenderer>().enabled = false;
             }
 
         }
@@ -59,10 +63,12 @@ public class Grapple : MonoBehaviour {
         Debug.DrawRay(transform.position, forwardPos);
 
         if (fired) {
-            if (is3D) {  
+            if (is3D) {
                 //Moves the player to the point of where they grappled
-                this.transform.Translate(forwardPos * Time.deltaTime * grappleSpeed);
+                //this.transform.Translate(forwardPos * Time.deltaTime * grappleSpeed);
+                playerRB.velocity = forwardPos * grappleSpeed;
                 StartCoroutine(checkSameSurface());
+                playerRB.useGravity = false;
                 //Checks to see if you fired at the same surface you are on
                 
                 
@@ -95,6 +101,7 @@ public class Grapple : MonoBehaviour {
         if (Physics.Raycast(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward), out hit, Mathf.Infinity)) {
             endpoint = hit.point;
             Debug.DrawRay(Camera.main.transform.position, (Camera.main.transform.forward) * hit.distance, Color.yellow);
+            playerRB.velocity = Vector3.zero;
         } else {
             Debug.DrawRay(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward) * 1000, Color.white);
             Debug.Log("Did not Hit");

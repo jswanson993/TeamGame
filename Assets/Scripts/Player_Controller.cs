@@ -32,9 +32,11 @@ public class Player_Controller : MonoBehaviour {
     public JumpState jState;
     public float stickToGroundForce = 100;
 
+    private Grapple playerGrapple;
+
     // Use this for initialization
     void Start () {
-
+        playerGrapple = GetComponent<Grapple>();
         p_rigidbody = GetComponent<Rigidbody>(); 
         jState = JumpState.Grounded;
         Rigid = GetComponent<Rigidbody>();
@@ -93,9 +95,15 @@ public class Player_Controller : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (is3D) { processFPMovementInput(); }
-        else { process2DMovementInput();
+        if (is3D && !playerGrapple.fired) { processFPMovementInput(); }
+
+        else if (!playerGrapple.fired)
+        { process2DMovementInput();
             aim2d();
+        }
+        if (is3D)
+        {
+            TestRotation();
         }
     }
 
@@ -255,8 +263,8 @@ public class Player_Controller : MonoBehaviour {
             endpoint = transform.TransformDirection(Camera.main.transform.forward) * 1000;
         }
         
-        GetComponent<LineRenderer>().enabled = true;
-        GetComponent<LineRenderer>().SetPositions(new Vector3[] {shotPoint.position, endpoint});
+        transform.GetChild(0).GetComponent<LineRenderer>().enabled = true;
+        transform.GetChild(0).GetComponent<LineRenderer>().SetPositions(new Vector3[] {shotPoint.position, endpoint});
         Invoke("RemoveTrail", .06f);
         /*
         GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -290,8 +298,8 @@ public class Player_Controller : MonoBehaviour {
             Debug.Log("RayMissed");
         }
 
-        GetComponent<LineRenderer>().enabled = true;
-        GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
+        transform.GetChild(0).GetComponent<LineRenderer>().enabled = true;
+        transform.GetChild(0).GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
         Invoke("RemoveTrail", .06f);
         ///*
     }
@@ -300,12 +308,12 @@ public class Player_Controller : MonoBehaviour {
 
     private void RemoveTrail()
     {
-        GetComponent<LineRenderer>().enabled = false;
+        transform.GetChild(0).GetComponent<LineRenderer>().enabled = false;
     }
 
     private void processFPMovementInput()
     {
-        TestRotation();
+        
         
 
         if (jState == JumpState.Grounded)
@@ -337,7 +345,7 @@ public class Player_Controller : MonoBehaviour {
                 }
                 else
                 {
-                    Rigid.AddForce(Vector3.down * stickToGroundForce);
+                    //Rigid.AddForce(Vector3.down * stickToGroundForce);
                 }
             }
 
