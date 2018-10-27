@@ -188,10 +188,13 @@ public class Player_Controller : MonoBehaviour {
     }
 
     private void aim2d() {
-        Vector2 point = Camera.main.WorldToScreenPoint(Input.mousePosition);
-        shotPoint.LookAt(point);
-        Debug.DrawRay(shotPoint.position, shotPoint.forward * 20);
-        //GUN.transform.eulerAngles = new Vector3(0,0,aim.z);
+       Vector3 mouse_pos = Input.mousePosition;
+        mouse_pos.z = -20;
+        Vector3 object_pos = Camera.main.WorldToScreenPoint(shotPoint.position);
+        mouse_pos.x = mouse_pos.x - object_pos.x;
+        mouse_pos.y = mouse_pos.y - object_pos.y;
+        float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     private bool CanWallRun()
