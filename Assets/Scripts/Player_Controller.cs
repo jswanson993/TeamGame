@@ -12,21 +12,24 @@ public class Player_Controller : MonoBehaviour {
     public float groundCheckDistance;
     public float wallRunSnapDistance;
     public float MaxMoveSpeed;
+    public float maxAirSpeed;
     static bool playerCanJump;
     public static bool hasGun;
-
-    private Rigidbody Rigid;
+  
+    public Rigidbody Rigid;
     private Vector2 rotation = new Vector2(0, 0);
     public Transform shotPoint;
     private Vector3 wallRunVector;
     private Rigidbody p_rigidbody;
     public GameObject FPGUN;
     public GameObject GUN;
-
+    Vector3 VShift;
+    Vector3 HShift;
+    public bool isWallLeaping;
     public bool is3D = true;
 
     public enum JumpState {Grounded, InAir, Wallrunning};
-    JumpState jState;
+    public JumpState jState;
 
     // Use this for initialization
     void Start () {
@@ -35,6 +38,7 @@ public class Player_Controller : MonoBehaviour {
         jState = JumpState.Grounded;
         Rigid = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         playerCanJump = true;
         FPGUN = GameObject.Find("FP_Gun");
         GUN = GameObject.Find("Gun");
@@ -52,9 +56,18 @@ public class Player_Controller : MonoBehaviour {
                 GameObject.Find("Gun").SetActive(false);
             }
         }
+
+        if (!is3D) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+
         //shotPoint = transform.Find("Camera/FP_Gun/Gun/FirePoint");
         //is3D = true;
 
+
+        VShift = Vector3.zero;
+        HShift = Vector3.zero;
     }
 	
 	// Update is called once per frame
@@ -80,7 +93,9 @@ public class Player_Controller : MonoBehaviour {
     void FixedUpdate()
     {
         if (is3D) { processFPMovementInput(); }
-        else { process2DMovementInput(); }
+        else { process2DMovementInput();
+            aim2d();
+        }
     }
 
     private void wallRun()
@@ -148,6 +163,8 @@ public class Player_Controller : MonoBehaviour {
             }
         }
 
+
+
         if (Input.GetButtonDown("Jump") && groundTest())
         {
             Vector3 haltVel = new Vector3(p_rigidbody.velocity.x, 0, p_rigidbody.velocity.z);
@@ -167,6 +184,12 @@ public class Player_Controller : MonoBehaviour {
         }
         */
 
+    }
+
+    private void aim2d() {
+        Quaternion aim = Quaternion.LookRotation(Input.mousePosition, Input.mousePosition);
+        GUN.transform.rotation = aim;
+        //GUN.transform.eulerAngles = new Vector3(0,0,aim.z);
     }
 
     private bool CanWallRun()
@@ -263,6 +286,8 @@ public class Player_Controller : MonoBehaviour {
         ///*
     }
 
+   
+
     private void RemoveTrail()
     {
         GetComponent<LineRenderer>().enabled = false;
@@ -271,25 +296,84 @@ public class Player_Controller : MonoBehaviour {
     private void processFPMovementInput()
     {
         TestRotation();
+        
 
-        if (jState != JumpState.Wallrunning)
+        if (jState == JumpState.Grounded)
         {
-            Vector3 VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
-            Vector3 HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
+            VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
+            HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
 
 
             //Rigid.MovePosition(transform.position + VShift + HShift);
             //Rigid.AddForce(Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
             //Rigid.velocity = new Vector3(Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).x, Rigid.velocity.y, Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).z);
-            Vector3 moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
-            //Debug.Log(moveVec.ToString());
+            Vector3 moveVec;
+            if (!isWallLeaping)
+            {
+                moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
+            }
+            else
+            {
+                moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, Mathf.Infinity) * MoveSpeed);
+            }
+
             Rigid.velocity = new Vector3(moveVec.x, Rigid.velocity.y, moveVec.z);
 
         }
 
+        else if (jState == JumpState.InAir || jState == JumpState.Wallrunning)
+        {
+            /*
+            VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
+            HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
+            //if (Math.Abs(Input.GetAxis("Vertical")) > .01f) { VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed/2; }
+            //if(Math.Abs(Input.GetAxis("Horizontal")) > .01f) { HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed/2; }
+            Vector3 moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 100f) * MoveSpeed);
+            Debug.DrawRay(transform.position, moveVec, Color.red);
+            
+            Rigid.velocity = Rigid.velocity + new Vector3(moveVec.x, 0, moveVec.z);
+            Rigid.velocity = new Vector3(Mathf.Clamp(Rigid.velocity.x, -maxAirSpeed, maxAirSpeed), Rigid.velocity.y, Mathf.Clamp(Rigid.velocity.z, -maxAirSpeed, maxAirSpeed));
+
+            //Vector3 TempVec = Vector3.Normalize(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.y)) * Rigid.velocity.magnitude;
+            //Debug.DrawRay(transform.position, TempVec);
+            //Rigid.velocity = new Vector3(TempVec.x, Rigid.velocity.y, TempVec.z);
+            */
+
+            VShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1))) * Input.GetAxis("Vertical") * MoveSpeed;
+            HShift = Vector3.Normalize(Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))) * Input.GetAxis("Horizontal") * MoveSpeed;
+
+
+            //Rigid.MovePosition(transform.position + VShift + HShift);
+            //Rigid.AddForce(Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * MoveSpeed);
+            //Rigid.velocity = new Vector3(Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).x, Rigid.velocity.y, Vector3.ClampMagnitude(Rigid.velocity, MaxMoveSpeed).z);
+            Vector3 moveVec;
+            if (!isWallLeaping)
+            {
+                moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, 4f) * maxAirSpeed);
+            }
+            else
+            {
+                moveVec = (Vector3.ClampMagnitude((transform.position + VShift + HShift) - transform.position, Mathf.Infinity) * maxAirSpeed);
+            }
+            Vector3 tVel = Vector3.ClampMagnitude(Vector3.ClampMagnitude(new Vector3(moveVec.x, 0, moveVec.z), maxAirSpeed), maxAirSpeed);
+            //Rigid.velocity = Rigid.velocity +new Vector3(tVel.x, 0, tVel.z);
+            if(Vector3.Magnitude(new Vector3(Rigid.velocity.x, 0, Rigid.velocity.z)) < maxAirSpeed)
+                Rigid.AddForce(tVel * 10);
+
+            if(jState == JumpState.Wallrunning && Rigid.velocity.y > 0f)
+            {
+                Rigid.velocity = Vector3.Scale(Rigid.velocity , new Vector3(1, 0, 1));
+            }
+
+        }
+
+        
+        //Debug.Log(moveVec.ToString());
+        
+
         //Invoke("groundTest", .3f);
-        
-        
+
+
 
     }
 
@@ -331,11 +415,13 @@ public class Player_Controller : MonoBehaviour {
                 if(hit.distance < groundCheckDistance)
                 {
                     jState = JumpState.Grounded;
+                    isWallLeaping = false;
                     return true;
                 }
                 else
                 {
-                    jState = JumpState.InAir;
+                    if(jState != JumpState.Wallrunning)
+                        jState = JumpState.InAir;
                     return false;
                 }
             }
@@ -369,5 +455,11 @@ public class Player_Controller : MonoBehaviour {
 
 
             
+    }
+
+
+    public void cameraTilt(Transform wall)
+    {
+        //if(transform)
     }
 }
