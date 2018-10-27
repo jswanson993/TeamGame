@@ -14,7 +14,7 @@ public class Player_Controller : MonoBehaviour {
     public float MaxMoveSpeed;
     public float maxAirSpeed;
     static bool playerCanJump;
-    public static bool hasGun;
+    public bool hasGun;
   
     public Rigidbody Rigid;
     private Vector2 rotation = new Vector2(0, 0);
@@ -188,8 +188,9 @@ public class Player_Controller : MonoBehaviour {
     }
 
     private void aim2d() {
-        Quaternion aim = Quaternion.LookRotation(Input.mousePosition, Input.mousePosition);
-        GUN.transform.rotation = aim;
+        Vector2 point = Camera.main.WorldToScreenPoint(Input.mousePosition);
+        shotPoint.LookAt(point);
+        Debug.DrawRay(shotPoint.position, shotPoint.forward * 20);
         //GUN.transform.eulerAngles = new Vector3(0,0,aim.z);
     }
 
