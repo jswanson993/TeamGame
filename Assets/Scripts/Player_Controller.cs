@@ -245,7 +245,7 @@ public class Player_Controller : MonoBehaviour {
         Vector3 endpoint;
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward), out hit, Mathf.Infinity))
+        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward, transform.TransformDirection(Camera.main.transform.forward), out hit, Mathf.Infinity))
         {
             Debug.DrawRay(Camera.main.transform.position, (Camera.main.transform.forward) * hit.distance, Color.yellow);
             Debug.Log("Did Hit");
@@ -269,7 +269,7 @@ public class Player_Controller : MonoBehaviour {
         {
             Debug.DrawRay(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward) * 1000, Color.white);
             Debug.Log("Did not Hit");
-            endpoint = transform.TransformDirection(Camera.main.transform.forward) * 1000;
+            endpoint = Camera.main.transform.position + Camera.main.transform.forward * 1000;
         }
         
         transform.GetChild(0).GetComponent<LineRenderer>().enabled = true;

@@ -73,7 +73,8 @@ public class Grapple : MonoBehaviour {
                 
                 
             } else {
-                this.transform.Translate(forwardPos * Time.deltaTime * grappleSpeed, Space.World);
+                //this.transform.Translate(forwardPos * Time.deltaTime * grappleSpeed, Space.World);
+                playerRB.velocity = forwardPos * grappleSpeed;
                 Debug.DrawRay(transform.position, forwardPos * 4, Color.cyan, 1f);
             }
             GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
@@ -98,18 +99,19 @@ public class Grapple : MonoBehaviour {
     private void grapple() {  
         RaycastHit hit;
         currentPos = Camera.main.transform.position;
-        if (Physics.Raycast(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward), out hit, Mathf.Infinity)) {
+        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward, (Camera.main.transform.forward), out hit, Mathf.Infinity)) {
             endpoint = hit.point;
             Debug.DrawRay(Camera.main.transform.position, (Camera.main.transform.forward) * hit.distance, Color.yellow);
             playerRB.velocity = Vector3.zero;
         } else {
-            Debug.DrawRay(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward) * 1000, Color.white);
+            Debug.DrawRay(Camera.main.transform.position, (Camera.main.transform.forward) * 10, Color.white);
             Debug.Log("Did not Hit");
-            endpoint = transform.TransformDirection(Camera.main.transform.forward) * 1000;
+            endpoint = Camera.main.transform.position + Camera.main.transform.forward * 1000;
+            Invoke("RemoveTrail", .06f);
         }
         GetComponent<LineRenderer>().enabled = true;
         GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
-        Invoke("RemoveTrail", .06f);
+        //Invoke("RemoveTrail", .06f);
 
     }
 
@@ -126,11 +128,12 @@ public class Grapple : MonoBehaviour {
             Debug.DrawRay(shotPoint.position, transform.TransformDirection(shotPoint.forward) * 1000, Color.white);
             endpoint = transform.TransformDirection(shotPoint.forward) * 1000;
             Debug.Log("RayMissed");
+            Invoke("RemoveTrail", .06f);
         }
 
         GetComponent<LineRenderer>().enabled = true;
         GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
-        Invoke("RemoveTrail", .06f);
+        
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -142,6 +145,11 @@ public class Grapple : MonoBehaviour {
     }
     private void OnCollisionExit(Collision collision) {
         leftSurface = true;
+    }
+
+    void RemoveTrail()
+    {
+        GetComponent<LineRenderer>().enabled = false;
     }
 
 }
