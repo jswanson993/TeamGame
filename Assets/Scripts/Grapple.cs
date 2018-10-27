@@ -88,7 +88,7 @@ public class Grapple : MonoBehaviour {
         yield return new WaitForSeconds(.05f);
         if (!leftSurface) {
             Debug.Log("Checking");
-            fired = false;
+            //fired = false;
         }
 
     }

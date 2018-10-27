@@ -36,6 +36,7 @@ public class Player_Controller : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        rotation =Camera.main.transform.eulerAngles;
         playerGrapple = GetComponent<Grapple>();
         p_rigidbody = GetComponent<Rigidbody>(); 
         jState = JumpState.Grounded;
