@@ -330,7 +330,15 @@ public class Player_Controller : MonoBehaviour {
             Rigid.velocity = new Vector3(moveVec.x, Rigid.velocity.y, moveVec.z);
             if (!Input.GetButton("Jump"))
             {
-                Rigid.AddForce(Vector3.down * stickToGroundForce);
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, Vector3.down, out hit, 3F))
+                {
+                    Rigid.AddForce(-hit.normal * stickToGroundForce);
+                }
+                else
+                {
+                    Rigid.AddForce(Vector3.down * stickToGroundForce);
+                }
             }
 
         }

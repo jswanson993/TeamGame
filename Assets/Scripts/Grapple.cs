@@ -70,6 +70,7 @@ public class Grapple : MonoBehaviour {
                 this.transform.Translate(forwardPos * Time.deltaTime * grappleSpeed, Space.World);
                 Debug.DrawRay(transform.position, forwardPos * 4, Color.cyan, 1f);
             }
+            GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
         } else if(PlayerController.jState != Player_Controller.JumpState.Wallrunning) {
             GetComponent<Rigidbody>().useGravity = true;
         }
