@@ -46,6 +46,8 @@ public class Player_Controller : MonoBehaviour {
         FPGUN = GameObject.Find("FP_Gun");
         GUN = GameObject.Find("Gun");
 
+        getPickup("Gun Pickup");
+
         if (hasGun) {
             if (is3D) {
                 GameObject.Find("FP_Gun").SetActive(true);
@@ -90,7 +92,7 @@ public class Player_Controller : MonoBehaviour {
         }
         */
         groundTest();
-        Debug.Log(jState.ToString());
+        //Debug.Log(jState.ToString());
 	}
 
     void FixedUpdate()
@@ -178,7 +180,14 @@ public class Player_Controller : MonoBehaviour {
         {
             Vector3 haltVel = new Vector3(p_rigidbody.velocity.x, 0, p_rigidbody.velocity.z);
             p_rigidbody.velocity = haltVel;
-            Rigid.AddForce(Vector3.up * JumpForce);
+            if (is3D)
+            {
+                Rigid.AddForce(Vector3.up * JumpForce);
+            }
+            else
+            {
+                Rigid.AddForce(Vector3.up * JumpForce * 1.3f);
+            }
             jState = JumpState.InAir;
             Debug.Log("Jump");
         }
@@ -294,7 +303,7 @@ public class Player_Controller : MonoBehaviour {
 
         } else {
             Debug.DrawRay(shotPoint.position, transform.TransformDirection(shotPoint.forward) * 1000, Color.white);
-            endpoint = transform.TransformDirection(shotPoint.forward) * 1000;
+            endpoint = (shotPoint.forward) * 1000;
             Debug.Log("RayMissed");
         }
 
@@ -425,6 +434,18 @@ public class Player_Controller : MonoBehaviour {
             
             //Debug.Log(Shift.ToString());
             Rigid.velocity = new Vector3(Shift, Rigid.velocity.y, 0);
+            if (!Input.GetButton("Jump") && jState == JumpState.Grounded)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, Vector3.down, out hit, 3F))
+                {
+                    Rigid.AddForce(-hit.normal * stickToGroundForce);
+                }
+                else
+                {
+                    //Rigid.AddForce(Vector3.down * stickToGroundForce);
+                }
+            }
 
         }
     }
