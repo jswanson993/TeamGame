@@ -30,6 +30,7 @@ public class Player_Controller : MonoBehaviour {
 
     public enum JumpState {Grounded, InAir, Wallrunning};
     public JumpState jState;
+    public float stickToGroundForce = 100;
 
     // Use this for initialization
     void Start () {
@@ -318,6 +319,10 @@ public class Player_Controller : MonoBehaviour {
             }
 
             Rigid.velocity = new Vector3(moveVec.x, Rigid.velocity.y, moveVec.z);
+            if (!Input.GetButton("Jump"))
+            {
+                Rigid.AddForce(Vector3.down * stickToGroundForce);
+            }
 
         }
 

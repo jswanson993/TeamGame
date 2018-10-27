@@ -629,11 +629,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 114257943412185428, guid: 01d3a9d5cc5a6c74caf0961a6605bb21,
-        type: 2}
-      propertyPath: goal
-      value: 
-      objectReference: {fileID: 1687624380}
     - target: {fileID: 114744818296155954, guid: 01d3a9d5cc5a6c74caf0961a6605bb21,
         type: 2}
       propertyPath: PatrolTargets.Array.data[0]
