@@ -194,9 +194,9 @@ public class Player_Controller : MonoBehaviour {
         mouse_pos.x = mouse_pos.x - object_pos.x;
         mouse_pos.y = mouse_pos.y - object_pos.y;
         float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-        if (mouse_pos.x > this.transform.position.x + ((float)Screen.width * .05)) {
+        if (mouse_pos.x > this.transform.position.x + ((float)Screen.width * .04)) {
             this.transform.rotation = Quaternion.Euler(0, 0, 0);
-        } else if(mouse_pos.x < this.transform.position.x - ((float)Screen.width * .05)) {
+        } else if(mouse_pos.x < this.transform.position.x - ((float)Screen.width * .04)) {
             this.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         GUN.transform.rotation = Quaternion.Euler(0, 0, angle);
