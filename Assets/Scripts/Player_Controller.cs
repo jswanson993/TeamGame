@@ -190,11 +190,16 @@ public class Player_Controller : MonoBehaviour {
     private void aim2d() {
        Vector3 mouse_pos = Input.mousePosition;
         mouse_pos.z = -20;
-        Vector3 object_pos = Camera.main.WorldToScreenPoint(shotPoint.position);
+        Vector3 object_pos = Camera.main.WorldToScreenPoint(GUN.transform.position);
         mouse_pos.x = mouse_pos.x - object_pos.x;
         mouse_pos.y = mouse_pos.y - object_pos.y;
         float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        if(mouse_pos.x > this.transform.position.x + 50) {
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+        } else if(mouse_pos.x < this.transform.position.x - 50) {
+            this.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        GUN.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     private bool CanWallRun()
@@ -393,13 +398,13 @@ public class Player_Controller : MonoBehaviour {
             float Shift = Input.GetAxis("Horizontal") * MoveSpeed;
            
             //Changes the rotation of the player based on the direction they are moving
-            if (Shift > 0) {
-                this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //if (Shift > 0) {
+            //    this.transform.rotation = Quaternion.Euler(0, 0, 0);
                 //shotPoint.transform.rotation = Quaternion.Euler(0, 90, 0);
-            } else if (Shift < 0) {
-               this.transform.rotation = Quaternion.Euler(0, 180, 0);
+            //} else if (Shift < 0) {
+            //   this.transform.rotation = Quaternion.Euler(0, 180, 0);
                 //shotPoint.transform.rotation = Quaternion.Euler(0, -90, 0);
-            }
+            //}
 
             
             //Debug.Log(Shift.ToString());
