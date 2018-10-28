@@ -10,15 +10,20 @@ public class ScenePositionLoader : MonoBehaviour {
     public GameObject playerPrefab;
     public GameObject player2DPrefab;
     public GameObject LoadPos;
-    void Start () {
-
-        DontDestroyOnLoad(this.gameObject);
-        PositionMarkers = GameObject.FindGameObjectsWithTag("Respawn");
-        foreach (GameObject item in PositionMarkers)
+    private static bool loadedFirst;
+    void Awake () {
+        if (!loadedFirst)
         {
-            if (item.GetComponent<PositionMarker>().isStart)
+            Debug.Log("Loaded first clone");
+            DontDestroyOnLoad(this.gameObject);
+            PositionMarkers = GameObject.FindGameObjectsWithTag("Respawn");
+            foreach (GameObject item in PositionMarkers)
             {
-                Instantiate(playerPrefab, item.transform.GetChild(0).position, Quaternion.identity).transform.GetChild(2).rotation = item.transform.rotation;
+                if (item.GetComponent<PositionMarker>().isStart)
+                {
+                    Instantiate(playerPrefab, item.transform.GetChild(0).position, Quaternion.identity).transform.GetChild(2).rotation = item.transform.rotation;
+                    loadedFirst = true;
+                }
             }
         }
 	}
@@ -57,6 +62,7 @@ public class ScenePositionLoader : MonoBehaviour {
             GameObject G = Instantiate(playerPrefab, LoadPos.transform.GetChild(0).position, Quaternion.identity);
             G.GetComponent<Player_Controller>().is3D = true;
             G.GetComponent<Player_Controller>().refreshIs3D();
+            G.transform.GetChild(2).rotation = LoadPos.transform.rotation;
         }
         else
         {
@@ -67,7 +73,7 @@ public class ScenePositionLoader : MonoBehaviour {
             Camera.main.GetComponent<SimpleFollow2d>().target = tempT;
             tempT.GetComponent<Player_Controller>().is3D = false;
             tempT.GetComponent<Player_Controller>().refreshIs3D();
-            tempT.transform.GetChild(2).rotation = LoadPos.transform.rotation;
+            
 
         }
     }
