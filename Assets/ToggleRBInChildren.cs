@@ -36,6 +36,7 @@ public class ToggleRBInChildren : MonoBehaviour {
                 RB.AddForce(Random.rotation.ToEulerAngles() * 100);
                 
             }
+            GetComponent<Collider>().enabled = false;
         }
     }
 }

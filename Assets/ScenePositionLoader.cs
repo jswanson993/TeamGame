@@ -39,18 +39,18 @@ public class ScenePositionLoader : MonoBehaviour {
         
         if (is3D)
         {
-            StartCoroutine(Example(SceneBuildIndex,Heading, is3D));
+            StartCoroutine(LoadNext(SceneBuildIndex,Heading, is3D));
             //Instantiate(playerPrefab, LoadPos.transform.GetChild(0).position, Quaternion.identity).transform.GetChild(2).rotation = LoadPos.transform.GetChild(0).rotation;
         }
         else
         {
-            StartCoroutine(Example(SceneBuildIndex, Heading, is3D));
+            StartCoroutine(LoadNext(SceneBuildIndex, Heading, is3D));
             //Debug.Log(LoadPos.transform.position);
             //Instantiate(player2DPrefab, LoadPos.transform.GetChild(0).position, Quaternion.identity).transform.GetChild(2).rotation = LoadPos.transform.GetChild(0).rotation;
         }
     }
 
-    IEnumerator Example(int buildIndex, string Heading, bool is3D)
+    IEnumerator LoadNext(int buildIndex, string Heading, bool is3D)
     {
         print(Time.time);
         yield return new WaitForSeconds(1);
@@ -71,6 +71,7 @@ public class ScenePositionLoader : MonoBehaviour {
             //Instantiate(player2DPrefab, LoadPos.transform.GetChild(0).position, Quaternion.identity);
             Transform tempT = Instantiate(player2DPrefab, LoadPos.transform.GetChild(0).position, Quaternion.identity).transform;
             Camera.main.GetComponent<SimpleFollow2d>().target = tempT;
+            Camera.main.GetComponent<Camera>().cullingMask = -1;
             tempT.GetComponent<Player_Controller>().is3D = false;
             tempT.GetComponent<Player_Controller>().refreshIs3D();
             
