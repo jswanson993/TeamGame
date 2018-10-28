@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimpleFollow2d : MonoBehaviour {
 
     // Use this for initialization
-    [SerializeField] Transform target;
+    public Transform target;
     [SerializeField] float zDistance;
 	void Start () {
 		

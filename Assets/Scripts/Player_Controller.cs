@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System.Windows.Forms;
 
 public class Player_Controller : MonoBehaviour {
 
@@ -76,6 +77,23 @@ public class Player_Controller : MonoBehaviour {
         HShift = Vector3.zero;
     }
 	
+    public void refreshIs3D()
+    {
+        if (!is3D)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            //SendKeys.Send("{ESCAPE}");
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
 	// Update is called once per frame
 	void Update () {
 
