@@ -115,6 +115,7 @@
      <Compile Include="Assets\Scripts\Wallrun.cs" />
      <Compile Include="Assets\Scripts\WallRunTrigger.cs" />
      <Compile Include="Assets\Scripts\WallRunTriggerGizmos.cs" />
+     <Compile Include="Assets\ToggleRBInChildren.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
      <None Include="Assets\PostProcessing\Resources\Shaders\Fog.shader" />
