@@ -302,6 +302,10 @@ public class Player_Controller : MonoBehaviour {
                 
 
             }
+            if (hit.collider.GetComponent<Killable>())
+            {
+                hit.collider.GetComponent<Killable>().TakeDamage(5);
+            }
             /*
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cube.transform.position = endpoint;

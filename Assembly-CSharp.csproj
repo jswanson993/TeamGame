@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Buttons.cs" />
      <Compile Include="Assets\EnemyDetectionHandler.cs" />
+     <Compile Include="Assets\Killable.cs" />
      <Compile Include="Assets\PositionMarker.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />

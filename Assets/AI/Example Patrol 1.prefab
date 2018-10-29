@@ -290,7 +290,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3d24b1e517883304d80a526f4434b341, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5144,6 +5144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAlerted: 0
   shotOrgin: {fileID: 4873621689991566}
+  player: {fileID: 0}
   shotCooldown: 1
   damagePerShot: 5
 --- !u!120 &120011921326918344
@@ -5161,7 +5162,7 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 89bdc168acb0e4f4aa73023a2435964e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

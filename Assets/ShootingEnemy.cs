@@ -12,7 +12,7 @@ public class ShootingEnemy : MonoBehaviour {
     public float shotCooldown = 1;
     private float cooldownTimer;
     public int damagePerShot = 5;
-    private LineRenderer LRend;
+    public LineRenderer LRend;
 	void Start () {
         LRend = GetComponent<LineRenderer>();
         LRend.enabled = false;
