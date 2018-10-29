@@ -8,7 +8,7 @@ public class GrapplePickup : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.transform.tag == "Player") {
 
-            other.gameObject.GetComponent<Grapple>().enableGrapple();
+            other.gameObject.transform.parent.GetComponent<Grapple>().enableGrapple();
             Destroy(this);
         }
     }

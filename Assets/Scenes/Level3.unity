@@ -5131,7 +5131,7 @@ Prefab:
     - target: {fileID: 114527417070540892, guid: ae572c92ebd20c74fb3c4d271daa55dd,
         type: 2}
       propertyPath: isStart
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114527417070540892, guid: ae572c92ebd20c74fb3c4d271daa55dd,
         type: 2}
@@ -5340,6 +5340,7 @@ GameObject:
   - component: {fileID: 584329012}
   - component: {fileID: 584329011}
   - component: {fileID: 584329010}
+  - component: {fileID: 584329014}
   - component: {fileID: 584329009}
   m_Layer: 0
   m_Name: Grapple Pickup
@@ -5377,7 +5378,7 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 584329008}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5427,6 +5428,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &584329014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 584329008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0fc7981a7682a44593021d28454f31f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &594784805
 GameObject:
   m_ObjectHideFlags: 0
@@ -11268,7 +11280,7 @@ Prefab:
     - target: {fileID: 114527417070540892, guid: ae572c92ebd20c74fb3c4d271daa55dd,
         type: 2}
       propertyPath: isStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114527417070540892, guid: ae572c92ebd20c74fb3c4d271daa55dd,
         type: 2}
