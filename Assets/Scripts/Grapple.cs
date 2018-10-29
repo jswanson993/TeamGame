@@ -136,7 +136,7 @@ public class Grapple : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        Debug.Log(collision.collider.name);
+        //Debug.Log(collision.collider.name);
         if (fired) {
             fired = false;
         }

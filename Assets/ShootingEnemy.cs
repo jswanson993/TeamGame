@@ -8,7 +8,7 @@ public class ShootingEnemy : MonoBehaviour {
     // Use this for initialization
     public bool isAlerted;
     public Transform shotOrgin;
-    private GameObject player;
+    public GameObject player;
     public float shotCooldown = 1;
     private float cooldownTimer;
     public int damagePerShot = 5;
@@ -17,12 +17,7 @@ public class ShootingEnemy : MonoBehaviour {
         LRend = GetComponent<LineRenderer>();
         LRend.enabled = false;
         cooldownTimer = 0;
-        if (GameObject.Find("PlayerFP(Clone)"))
-        {
-            player = GameObject.Find("PlayerFP(Clone)");
-        }
-        else
-            GameObject.Find("Player2D(Clone)");
+        
 
     }
 	
@@ -37,6 +32,12 @@ public class ShootingEnemy : MonoBehaviour {
 
     private void TryShoot()
     {
+        if (GameObject.FindObjectOfType<Player_Controller>())
+        {
+            player = GameObject.FindObjectOfType<Player_Controller>().gameObject;
+        }
+        else
+            player = GameObject.FindObjectOfType<Player_Controller>().gameObject;
         RaycastHit hit;
         if(Physics.Raycast(shotOrgin.position, player.transform.position - shotOrgin.position, out hit, Mathf.Infinity) && cooldownTimer > shotCooldown)
         {
