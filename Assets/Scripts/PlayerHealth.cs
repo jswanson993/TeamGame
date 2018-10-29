@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour {
 
         if(currentHP <= 0) {
             currentHP = 0;
+            playerDeath();
         }
     }
 

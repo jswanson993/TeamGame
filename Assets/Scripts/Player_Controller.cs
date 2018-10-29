@@ -34,6 +34,7 @@ public class Player_Controller : MonoBehaviour {
     public float stickToGroundForce = 100;
 
     private Grapple playerGrapple;
+    private float time;
 
     // Use this for initialization
     void Start () {
@@ -47,7 +48,7 @@ public class Player_Controller : MonoBehaviour {
         playerCanJump = true;
         FPGUN = GameObject.Find("FP_Gun");
         GUN = GameObject.Find("Gun");
-
+        time = 0;
         getPickup("Gun Pickup");
 
         if (hasGun) {
@@ -110,7 +111,23 @@ public class Player_Controller : MonoBehaviour {
             groundTest();
         }
         */
+        
         groundTest();
+        if (!groundTest()) {
+            if (time == 0f) {
+                time = Time.deltaTime;
+            }
+        } else {
+            if (time >= 5) {
+                GetComponent<PlayerHealth>().takeDamage((int)(time * 50));
+
+            }
+            Debug.Log("Time in air: " + time);
+            time = 0;
+            
+        }
+
+
         //Debug.Log(jState.ToString());
 	}
 
@@ -230,12 +247,12 @@ public class Player_Controller : MonoBehaviour {
         mouse_pos.x = mouse_pos.x - object_pos.x;
         mouse_pos.y = mouse_pos.y - object_pos.y;
         float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-       // if (mouse_pos.x > this.transform.position.x + ((float)Screen.width * .04)) {
-       //     this.transform.rotation = Quaternion.Euler(0, 0, 0);
-       // } else if(mouse_pos.x < this.transform.position.x - ((float)Screen.width * .04)) {
-       //     this.transform.rotation = Quaternion.Euler(0, 180, 0);
-       // }
-       transform.rotation = Quaternion.Euler(0, 0, angle);
+        if (mouse_pos.x > this.transform.position.x + ((float)Screen.width * .04)) {
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+        } else if(mouse_pos.x < this.transform.position.x - ((float)Screen.width * .04)) {
+            this.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+       GUN.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     private bool CanWallRun()
