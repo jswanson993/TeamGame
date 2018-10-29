@@ -12,6 +12,7 @@ public class ScenePositionLoader : MonoBehaviour {
     public GameObject LoadPos;
     private static bool loadedFirst;
     private string lastHeading;
+    public bool wasLastHeading3D;
     void Awake () {
         if (!loadedFirst)
         {
@@ -24,6 +25,9 @@ public class ScenePositionLoader : MonoBehaviour {
                 {
                     Instantiate(playerPrefab, item.transform.GetChild(0).position, Quaternion.identity).transform.GetChild(2).rotation = item.transform.rotation;
                     loadedFirst = true;
+                    lastHeading = item.name;
+                    Debug.LogError("Heading = " + item.name);
+                    wasLastHeading3D = true; //BAD
                 }
             }
         }
@@ -37,6 +41,7 @@ public class ScenePositionLoader : MonoBehaviour {
     public void LoadRequestedScene(int SceneBuildIndex, string Heading, bool is3D)
     {
         lastHeading = Heading;
+        wasLastHeading3D = is3D;
         SceneManager.LoadScene(SceneBuildIndex);
         
         if (is3D)
@@ -56,6 +61,7 @@ public class ScenePositionLoader : MonoBehaviour {
     {
         print(Time.time);
         yield return new WaitForSeconds(1);
+        Debug.LogError("Heading = " + Heading);
         LoadPos = GameObject.Find(Heading);
         Debug.Log(LoadPos.name);
         if (is3D)
