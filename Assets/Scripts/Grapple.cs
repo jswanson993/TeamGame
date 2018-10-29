@@ -18,6 +18,7 @@ public class Grapple : MonoBehaviour {
     private bool leftSurface;
     private Player_Controller PlayerController;
     private Rigidbody playerRB;
+    public GameObject TestPrefab;
     // Use this for initialization
     void Start () {
         //Change this after done implementing
@@ -40,7 +41,7 @@ public class Grapple : MonoBehaviour {
                     grapple2D();
                 }
                 //Checks to see if the point the player is trying to grapple to is close enough.
-                if (Math.Abs(endpoint.x - currentPos.x) <= grappleDistance && Math.Abs(endpoint.y - currentPos.y) <= grappleDistance && Math.Abs(endpoint.z - currentPos.z) <= grappleDistance) {
+                if (is3D && Math.Abs(endpoint.x - currentPos.x) <= grappleDistance && Math.Abs(endpoint.y - currentPos.y) <= grappleDistance && Math.Abs(endpoint.z - currentPos.z) <= grappleDistance) {
                     fired = true;
                     if (is3D) {
                         forwardPos = Camera.main.transform.forward;
@@ -51,6 +52,21 @@ public class Grapple : MonoBehaviour {
                     }
                     GetComponent<Rigidbody>().useGravity = false;
                     
+                }
+                else
+                {
+                    fired = true;
+                    if (is3D)
+                    {
+                        forwardPos = Camera.main.transform.forward;
+                    }
+                    else
+                    {
+
+                        forwardPos = shotPoint.forward;
+
+                    }
+                    GetComponent<Rigidbody>().useGravity = false;
                 }
             } else {
                 fired = false;
@@ -73,6 +89,7 @@ public class Grapple : MonoBehaviour {
                 
             } else {
                 //this.transform.Translate(forwardPos * Time.deltaTime * grappleSpeed, Space.World);
+                Debug.LogWarning("TryingShotForward");
                 playerRB.velocity = forwardPos * grappleSpeed;
                 Debug.DrawRay(transform.position, forwardPos * 4, Color.cyan, 1f);
             }
@@ -117,15 +134,16 @@ public class Grapple : MonoBehaviour {
     private void grapple2D() {
         int layerMask = 1 << 11;
         layerMask = ~layerMask;
-        Vector3 endpoint;
+        
         RaycastHit hit;
         if (Physics.Raycast(shotPoint.position, shotPoint.forward, out hit, Mathf.Infinity, layerMask)) {
             Debug.DrawRay(shotPoint.position, shotPoint.forward * hit.distance, Color.red, 1f);
             endpoint = hit.point;
+            //Instantiate(TestPrefab, hit.point, Quaternion.identity);
 
         } else {
-            Debug.DrawRay(shotPoint.position, transform.TransformDirection(shotPoint.forward) * 1000, Color.white);
-            endpoint = transform.TransformDirection(shotPoint.forward) * 1000;
+            Debug.DrawRay(shotPoint.position, shotPoint.forward * 1000, Color.white);
+            endpoint = shotPoint.position + (shotPoint.forward) * 1000;
             Debug.Log("RayMissed");
             Invoke("RemoveTrail", .06f);
         }

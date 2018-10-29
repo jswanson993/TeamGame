@@ -32,7 +32,7 @@ public class Wallrun : MonoBehaviour {
             {
                 playerRB.useGravity = true;
                 p_controller.jState = Player_Controller.JumpState.InAir;
-                playerRB.AddForce(wallJumpForce*(getNonYVec(Camera.main.transform.forward) + Vector3.up + getReleaseSide()));
+                playerRB.AddForce(wallJumpForce*(getNonYVec(Camera.main.transform.forward) + Vector3.up*2 + getReleaseSide()));
             }
             checkWallRelease();
         }

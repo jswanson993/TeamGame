@@ -276,6 +276,7 @@ MonoBehaviour:
   grappleSpeed: 20
   fired: 0
   shotPoint: {fileID: 4584606657572000}
+  TestPrefab: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
 --- !u!114 &114984693148075800
 MonoBehaviour:
   m_ObjectHideFlags: 1
