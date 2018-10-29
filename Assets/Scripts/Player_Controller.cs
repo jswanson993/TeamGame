@@ -121,7 +121,7 @@ public class Player_Controller : MonoBehaviour {
                 GetComponent<PlayerHealth>().takeDamage((int)(time * 50));
 
             }
-            Debug.Log("Time in air: " + time);
+
             time = 0;
             
         }

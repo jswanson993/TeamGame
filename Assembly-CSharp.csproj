@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\DealDamage.cs" />
     <Compile Include="Assets\Scripts\EditorMeshRendHider.cs" />
     <Compile Include="Assets\Scripts\Grapple.cs" />
+    <Compile Include="Assets\Scripts\GrapplePickup.cs" />
     <Compile Include="Assets\Scripts\GunPickup.cs" />
     <Compile Include="Assets\Scripts\HitTrigger.cs" />
     <Compile Include="Assets\Scripts\LoadNextArea.cs" />

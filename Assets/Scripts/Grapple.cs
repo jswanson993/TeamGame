@@ -152,6 +152,7 @@ public class Grapple : MonoBehaviour {
     }
 
     public void enableGrapple() {
+        Debug.Log("is Enabled");
         hasGrapple = true;
         //PlayerPrefs.Save()
     }

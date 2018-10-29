@@ -18,7 +18,8 @@ public class GunPickup : MonoBehaviour {
     {
         if(other.transform.tag == "Player")
         {
-            other.GetComponent<Player_Controller>().getPickup(this.transform.name);
+            Debug.Log("PRINT ME: " + this.name);
+            other.GetComponent<Player_Controller>().getPickup(this.name);
             Destroy(this);
         }
     }
