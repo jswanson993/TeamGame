@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
     private string lastPosition;
+    private int currentHealth;
     public bool is3d;
     public GameObject SceneLoader;
 
@@ -23,10 +24,12 @@ public class Manager : MonoBehaviour {
         
     }
 
+    private void Awake() {
+        DontDestroyOnLoad(gameObject);
+    }
 
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         
     }
 
@@ -42,5 +45,13 @@ public class Manager : MonoBehaviour {
             //SceneLoader.GetComponent<ScenePositionLoader>().LoadRequestedScene(SceneManager.GetActiveScene().buildIndex, lastPosition, is3d);
             throw new Exception("no scene loader");
         }
+    }
+
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth() {
+        currentHealth = GetComponent<PlayerHealth>().getCurrentHealth();
     }
 }

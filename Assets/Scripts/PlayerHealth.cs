@@ -39,4 +39,13 @@ public class PlayerHealth : MonoBehaviour {
         GameObject.Find("ScenePositionLoader").GetComponent<ScenePositionLoader>().LoadRequestedScene(SceneManager.GetActiveScene().buildIndex, GameObject.Find("ScenePositionLoader").GetComponent<ScenePositionLoader>().getLastHeading(), GameObject.Find("ScenePositionLoader").GetComponent<ScenePositionLoader>().wasLastHeading3D);
 
     }
+
+    private void setPlayerHealth() {
+        currentHP = GetComponent<Manager>().getCurrentHealth();
+        healthUI.text = currentHP + "";
+    }
+
+    public int getCurrentHealth() {
+        return currentHP;
+    }
 }
