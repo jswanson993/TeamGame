@@ -348,6 +348,10 @@ public class Player_Controller : MonoBehaviour {
                 }
 
             }
+            if (hit.collider.GetComponent<Killable>())
+            {
+                hit.collider.GetComponent<Killable>().TakeDamage(5);
+            }
 
         } else {
             Debug.DrawRay(shotPoint.position, transform.TransformDirection(shotPoint.forward) * 1000, Color.white);
