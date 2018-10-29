@@ -10,6 +10,7 @@ public class Killable : MonoBehaviour {
     public GameObject particlePrefab;
     private int currentHealth;
     public float despawnTimer = 5f;
+    private bool isDead;
 	void Start () {
         currentHealth = StartingHealth;
 	}
@@ -24,12 +25,14 @@ public class Killable : MonoBehaviour {
         currentHealth = currentHealth - DamageTaken;
         if (currentHealth <= 0)
         {
-            Die();
+            if(!isDead)
+                Die();
         }
     }
 
     private void Die()
     {
+        isDead = true;
         if (transform.parent.GetComponent<ShootingEnemy>()!=null)
         {
             transform.parent.GetComponent<ShootingEnemy>().LRend.enabled = false;
