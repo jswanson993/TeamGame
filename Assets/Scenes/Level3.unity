@@ -2177,6 +2177,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6b6cf46278127499b5286ccf5768d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PatrolTargets:
+  - {fileID: 659628845}
+  - {fileID: 742515636}
+  LoopState: 0
+  waitTime: 0
 --- !u!195 &168259601
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5972,7 +5977,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-275350
+  m_Name: pb_Mesh20402
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -10603,7 +10608,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-267342
+  m_Name: pb_Mesh20292
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -12131,6 +12136,11 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.y
       value: -79
+      objectReference: {fileID: 0}
+    - target: {fileID: 224566104083128130, guid: 6ed144787831f584c989d26c441a2393,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ed144787831f584c989d26c441a2393, type: 2}
