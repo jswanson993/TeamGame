@@ -48,9 +48,4 @@ public class PlayerHealth : MonoBehaviour {
     public int getCurrentHealth() {
         return currentHP;
     }
-
-    public void gainHealth(int health) {
-        currentHP += health;
-        healthUI.text = currentHP + "";
-    }
 }

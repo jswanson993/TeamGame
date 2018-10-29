@@ -46,7 +46,6 @@ GameObject:
   - component: {fileID: 114612844751117194}
   - component: {fileID: 114802206007980636}
   - component: {fileID: 114934741299646766}
-  - component: {fileID: 114105488981169130}
   m_Layer: 11
   m_Name: Player2d
   m_TagString: Player
@@ -221,23 +220,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114105488981169130
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1856755762473786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a5921f9c96fece46a9984b26dc59569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHP: 100
-  damageEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114612844751117194
 MonoBehaviour:
   m_ObjectHideFlags: 1
