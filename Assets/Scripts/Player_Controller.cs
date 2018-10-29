@@ -34,7 +34,7 @@ public class Player_Controller : MonoBehaviour {
     public float stickToGroundForce = 100;
 
     private Grapple playerGrapple;
-    private float time;
+    public float time;
 
     // Use this for initialization
     void Start () {
@@ -113,18 +113,26 @@ public class Player_Controller : MonoBehaviour {
         */
         
         groundTest();
-        if (!groundTest()) {
-                time += Time.deltaTime;
-            
-        } else {
+        if (!groundTest())
+        {
+            time += Time.deltaTime;
+        }
+        else {
             if (time >= 2) {
                 GetComponent<PlayerHealth>().takeDamage((int)(time * 50));
+                Debug.Log("DamageDealt");
 
             }
 
             time = 0;
             
         }
+
+        if (jState == JumpState.Wallrunning)
+        {
+            time = 0;
+        }
+        
 
 
         //Debug.Log(jState.ToString());
