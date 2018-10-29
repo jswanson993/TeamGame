@@ -9,7 +9,7 @@ public class GrapplePickup : MonoBehaviour {
         if (other.transform.tag == "Player") {
 
             other.gameObject.transform.parent.GetComponent<Grapple>().enableGrapple();
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }

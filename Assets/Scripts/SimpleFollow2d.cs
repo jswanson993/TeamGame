@@ -18,7 +18,7 @@ public class SimpleFollow2d : MonoBehaviour {
 
     void LateUpdate()
     {
-        Vector3 newPos = new Vector3(target.position.x, target.position.y, -zDistance);
+        Vector3 newPos = new Vector3(target.position.x, target.position.y + 5, -zDistance);
         transform.position = newPos;
     }
 }

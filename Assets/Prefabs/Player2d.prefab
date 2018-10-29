@@ -247,6 +247,7 @@ MonoBehaviour:
   is3D: 0
   jState: 0
   stickToGroundForce: 100
+  time: 0
 --- !u!114 &114802206007980636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -270,8 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e3453a264614247b62ca35d5a6a02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grappleDistance: 100
-  grappleSpeed: 50
+  grappleDistance: 50
+  grappleSpeed: 20
   fired: 0
   shotPoint: {fileID: 4584606657572000}
 --- !u!120 &120048548942600072
