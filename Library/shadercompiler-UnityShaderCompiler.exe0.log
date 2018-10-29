@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of c3d9196... extra
 Base path: C:/Program Files/Unity/Editor/Data
 Cmd: initializeCompiler
 Cmd: preprocess
@@ -84,6 +87,7 @@ Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler
+<<<<<<< HEAD
 =======
 Base path: H:/Unity/Editor/Data
 Cmd: initializeCompiler
@@ -249,3 +253,5 @@ Cmd: compileSnippet
 >>>>>>> 0da12dcf5e8f721e8e3295dd4cb281e6847a054e
 =======
 >>>>>>> parent of be1d9c4... Added shooting AI enemy
+=======
+>>>>>>> parent of c3d9196... extra
