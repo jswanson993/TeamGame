@@ -9,47 +9,50 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1793198512104702}
+  m_RootGameObject: {fileID: 1016078907722328}
   m_IsPrefabAsset: 1
---- !u!1 &1793198512104702
+--- !u!1 &1016078907722328
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4117573836114228}
-  - component: {fileID: 114518428324160398}
+  - component: {fileID: 4399499970016014}
+  - component: {fileID: 114382332516852520}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: ScenePositionLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4117573836114228
+--- !u!4 &4399499970016014
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1793198512104702}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 1016078907722328}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114518428324160398
+--- !u!114 &114382332516852520
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1793198512104702}
+  m_GameObject: {fileID: 1016078907722328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0133b6ee4e3bddd4db5bff320557a7b2, type: 3}
+  m_Script: {fileID: 11500000, guid: f13fef2eecae8fd498197009fdafd1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  is3d: 0
-  SceneLoader: {fileID: 0}
+  playerPrefab: {fileID: 1828045127570740, guid: 323e519e36d6b3a4fa1200f8388e31c6,
+    type: 2}
+  player2DPrefab: {fileID: 1856755762473786, guid: b5cd8dca0ee128b44a78a89c24a5b60e,
+    type: 2}
+  LoadPos: {fileID: 0}
