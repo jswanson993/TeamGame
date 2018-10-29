@@ -16,7 +16,8 @@ public class PlayerHealth : MonoBehaviour {
     private int currentHP;
 
     private void Start() {
-        setPlayerHealth();
+        //setPlayerHealth();
+        currentHP = startingHP;
         GameObject healthGO = GameObject.Find("HealthTracker");
         healthUI = healthGO.GetComponent<Text>();
         healthUI.text = "100";

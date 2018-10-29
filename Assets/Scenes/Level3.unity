@@ -1963,7 +1963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlerted: 0
-  shotOrgin: {fileID: 695747309}
+  shotOrgin: {fileID: 0}
   player: {fileID: 0}
   shotCooldown: 1
   damagePerShot: 5
@@ -2089,6 +2089,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6b6cf46278127499b5286ccf5768d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PatrolTargets:
+  - {fileID: 659628845}
+  - {fileID: 742515636}
+  LoopState: 0
+  waitTime: 0
 --- !u!195 &168259601
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6047,7 +6052,7 @@ Transform:
   m_Children:
   - {fileID: 1425049617}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &584329014
 MonoBehaviour:
@@ -6444,7 +6449,7 @@ MeshCollider:
   m_GameObject: {fileID: 609295930}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -8689,7 +8694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartingHealth: 10
   particlePrefab: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
-  despawnTimer: 10
+  despawnTimer: 5
 --- !u!54 &695747311
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12261,7 +12266,7 @@ Prefab:
     - target: {fileID: 224063202911930536, guid: 6ed144787831f584c989d26c441a2393,
         type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 224063202911930536, guid: 6ed144787831f584c989d26c441a2393,
         type: 2}
@@ -12438,7 +12443,7 @@ Transform:
   - {fileID: 1308935020}
   - {fileID: 347097861}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &832694633
 GameObject:
@@ -13870,7 +13875,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4040865958030688, guid: f399ee15a36e9a24d940f4429a02f345, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f399ee15a36e9a24d940f4429a02f345, type: 2}
@@ -14009,7 +14014,7 @@ MeshCollider:
   m_GameObject: {fileID: 951264929}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -14490,7 +14495,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1001015203
 GameObject:
@@ -15254,7 +15259,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4719675077306684, guid: ae572c92ebd20c74fb3c4d271daa55dd, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1427757629580518, guid: ae572c92ebd20c74fb3c4d271daa55dd, type: 2}
       propertyPath: m_Name
@@ -17667,7 +17672,7 @@ Transform:
   - {fileID: 2029518673}
   - {fileID: 5576722}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1308935019
 GameObject:
@@ -18845,7 +18850,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4102796239033018, guid: b0fe20a64150e1d489cd6b8393b3c1ec, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 33880440730844778, guid: b0fe20a64150e1d489cd6b8393b3c1ec,
         type: 2}
@@ -30833,7 +30838,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &2054369409
 GameObject:

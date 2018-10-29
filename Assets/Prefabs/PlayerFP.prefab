@@ -209,7 +209,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1828045127570740}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -65.724655, y: 9.231972, z: -98.60076}
+  m_LocalPosition: {x: -9.7854, y: 0.22978973, z: -81.28375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4641520503502008}
@@ -482,6 +482,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  GM: {fileID: 0}
 --- !u!114 &114204978622690978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -510,6 +511,7 @@ MonoBehaviour:
   jState: 0
   stickToGroundForce: 100
   time: 0
+  mouseTex: {fileID: 2800000, guid: 24b4264d35557234096b8ea48ac094b1, type: 3}
 --- !u!114 &114386821743688328
 MonoBehaviour:
   m_ObjectHideFlags: 1

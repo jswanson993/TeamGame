@@ -35,7 +35,7 @@ public class Player_Controller : MonoBehaviour {
 
     private Grapple playerGrapple;
     public float time;
-
+    public Texture2D mouseTex;
     // Use this for initialization
     void Start () {
         rotation =Camera.main.transform.eulerAngles;
@@ -86,6 +86,7 @@ public class Player_Controller : MonoBehaviour {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
+            Cursor.SetCursor(mouseTex, new Vector2(mouseTex.height/2,mouseTex.width/2), CursorMode.Auto);
             //SendKeys.Send("{ESCAPE}");
         }
         else
