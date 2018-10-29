@@ -11,17 +11,17 @@ public class PlayerHealth : MonoBehaviour {
     private Text healthUI;
     public UnityEvent damageEvent;
     //public UnityEvent deathEvent;
-    public GameObject GM;
+    public GameObject canvas;
 
     private int currentHP;
 
     private void Start() {
-        setPlayerHealth();
+        currentHP = startingHP;
         GameObject healthGO = GameObject.Find("HealthTracker");
         healthUI = healthGO.GetComponent<Text>();
         healthUI.text = "100";
-       // GM = GameObject.FindWithTag("GameController");
-    }
+    } 
+
 
     public void takeDamage(int damage) {
         currentHP -= damage;

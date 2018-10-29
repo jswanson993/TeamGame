@@ -109,6 +109,7 @@
      <Compile Include="Assets\Scripts\EditorMeshRendHider.cs" />
      <Compile Include="Assets\Scripts\Grapple.cs" />
      <Compile Include="Assets\Scripts\GrapplePickup.cs" />
+     <Compile Include="Assets\Scripts\GrappleTutorial.cs" />
      <Compile Include="Assets\Scripts\GunPickup.cs" />
      <Compile Include="Assets\Scripts\HealthPickup.cs" />
      <Compile Include="Assets\Scripts\HitTrigger.cs" />
@@ -120,6 +121,7 @@
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\ShotTriggerInteractable.cs" />
      <Compile Include="Assets\Scripts\SimpleFollow2d.cs" />
+     <Compile Include="Assets\Scripts\Tutorial.cs" />
      <Compile Include="Assets\Scripts\Wallrun.cs" />
      <Compile Include="Assets\Scripts\WallRunTrigger.cs" />
      <Compile Include="Assets\Scripts\WallRunTriggerGizmos.cs" />
