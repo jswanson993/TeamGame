@@ -25380,7 +25380,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh13072
+  m_Name: pb_Mesh18510
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -33292,6 +33292,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4717845214290290, guid: 323e519e36d6b3a4fa1200f8388e31c6, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114204978622690978, guid: 323e519e36d6b3a4fa1200f8388e31c6,
+        type: 2}
+      propertyPath: hasGun
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

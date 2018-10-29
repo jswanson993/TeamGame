@@ -433,6 +433,7 @@ MonoBehaviour:
   isWallLeaping: 0
   is3D: 1
   jState: 0
+  stickToGroundForce: 100
 --- !u!114 &114386821743688328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -458,7 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5053f5bd00a9e24d8e5d3832b828dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallJumpForce: 1000
+  wallJumpForce: 1200
 --- !u!114 &114770856677793338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -477,7 +478,7 @@ LineRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1828045127570740}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

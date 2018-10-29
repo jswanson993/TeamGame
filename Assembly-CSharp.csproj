@@ -53,9 +53,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\EditorMeshRendHider.cs" />
-     <Compile Include="Assets\NavAgentMover.cs" />
-     <Compile Include="Assets\NavAgentPatrol.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -104,10 +101,12 @@
      <Compile Include="Assets\Scripts\Camera2dFollow.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\DealDamage.cs" />
+     <Compile Include="Assets\Scripts\EditorMeshRendHider.cs" />
      <Compile Include="Assets\Scripts\Grapple.cs" />
      <Compile Include="Assets\Scripts\GunPickup.cs" />
      <Compile Include="Assets\Scripts\HitTrigger.cs" />
      <Compile Include="Assets\Scripts\LoadNextArea.cs" />
+     <Compile Include="Assets\Scripts\NavAgentPatrol.cs" />
      <Compile Include="Assets\Scripts\Pickup.cs" />
      <Compile Include="Assets\Scripts\Player_Controller.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
