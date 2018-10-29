@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
+    private string lastPosition;
+    public bool is3d;
 
 	// Use this for initialization
 	void Start () {
-		
+        lastPosition = GetComponent<ScenePositionLoader>().getLastHeading();
+        Debug.Log("Last Position:" + lastPosition);
 	}
 	
 	// Update is called once per frame
@@ -16,6 +19,6 @@ public class Manager : MonoBehaviour {
 	}
 
     public void reset() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
+        GetComponent<ScenePositionLoader>().LoadRequestedScene(SceneManager.GetActiveScene().buildIndex, lastPosition, is3d);
     }
 }

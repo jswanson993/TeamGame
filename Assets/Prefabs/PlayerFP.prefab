@@ -406,7 +406,19 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   deathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114518428324160398, guid: 660e3150481300840ba058e74f5613da,
+          type: 2}
+        m_MethodName: reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114204978622690978
@@ -447,7 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e3453a264614247b62ca35d5a6a02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grappleDistance: 100
+  grappleDistance: 50
   grappleSpeed: 20
   fired: 0
   shotPoint: {fileID: 0}

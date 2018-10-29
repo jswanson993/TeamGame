@@ -114,11 +114,10 @@ public class Player_Controller : MonoBehaviour {
         
         groundTest();
         if (!groundTest()) {
-            if (time == 0f) {
-                time = Time.deltaTime;
-            }
+                time += Time.deltaTime;
+            
         } else {
-            if (time >= 5) {
+            if (time >= 2) {
                 GetComponent<PlayerHealth>().takeDamage((int)(time * 50));
 
             }
@@ -147,6 +146,7 @@ public class Player_Controller : MonoBehaviour {
 
     private void wallRun()
     {
+        time = 0;
         RaycastHit filteredHit;
         Vector3 rayDirection;
 
@@ -526,18 +526,16 @@ public class Player_Controller : MonoBehaviour {
     }
 
     public void getPickup(System.String pickup) {
-        if (pickup == "Gun Pickup")
-        {
+        if (pickup == "Gun Pickup") {
             hasGun = true;
             //GameObject gun = GameObject.Find("Gun");
-            if (!is3D)
-            {
+            if (!is3D) {
                 GUN.SetActive(true);
-            }
-            else
-            {
+            } else {
                 FPGUN.SetActive(true);
             }
+        } else if (pickup == "Grapple Pickup") {
+            GetComponent<Grapple>().enableGrapple();
         }
 
 

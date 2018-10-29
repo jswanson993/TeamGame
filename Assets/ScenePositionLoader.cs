@@ -11,6 +11,7 @@ public class ScenePositionLoader : MonoBehaviour {
     public GameObject player2DPrefab;
     public GameObject LoadPos;
     private static bool loadedFirst;
+    private string lastHeading;
     void Awake () {
         if (!loadedFirst)
         {
@@ -35,6 +36,7 @@ public class ScenePositionLoader : MonoBehaviour {
 
     public void LoadRequestedScene(int SceneBuildIndex, string Heading, bool is3D)
     {
+        lastHeading = Heading;
         SceneManager.LoadScene(SceneBuildIndex);
         
         if (is3D)
@@ -77,5 +79,9 @@ public class ScenePositionLoader : MonoBehaviour {
             
 
         }
+    }
+
+    public string getLastHeading() {
+        return lastHeading;
     }
 }

@@ -21,7 +21,6 @@ public class Grapple : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //Change this after done implementing
-        hasGrapple = true;
         PlayerController = GetComponent<Player_Controller>();
         is3D = GetComponent<Player_Controller>().is3D;
         shotPoint = GetComponent<Player_Controller>().shotPoint;
@@ -150,6 +149,11 @@ public class Grapple : MonoBehaviour {
     void RemoveTrail()
     {
         GetComponent<LineRenderer>().enabled = false;
+    }
+
+    public void enableGrapple() {
+        hasGrapple = true;
+        //PlayerPrefs.Save()
     }
 
 }
