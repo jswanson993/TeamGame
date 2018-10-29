@@ -11,24 +11,26 @@ public class PlayerHealth : MonoBehaviour {
     private Text healthUI;
     public UnityEvent damageEvent;
     //public UnityEvent deathEvent;
-    GameObject GM;
+    public GameObject GM;
 
     private int currentHP;
 
     private void Start() {
-        currentHP = startingHP;
+        setPlayerHealth();
         GameObject healthGO = GameObject.Find("HealthTracker");
         healthUI = healthGO.GetComponent<Text>();
         healthUI.text = "100";
-        GM = GameObject.Find("Game Manager");
+       // GM = GameObject.FindWithTag("GameController");
     }
 
     public void takeDamage(int damage) {
         currentHP -= damage;
         healthUI.text = currentHP + "";
-        if(currentHP <= 0) {
+        //GM.GetComponent<Manager>().setCurrentHealth();
+        if (currentHP <= 0) {
             currentHP = 0;
             healthUI.text = currentHP + "";
+            //GetComponent<Manager>().setCurrentHealth();
             playerDeath();
         }
     }
@@ -41,7 +43,7 @@ public class PlayerHealth : MonoBehaviour {
     }
 
     private void setPlayerHealth() {
-        currentHP = GetComponent<Manager>().getCurrentHealth();
+        //GM.GetComponent<Manager>().getCurrentHealth();
         healthUI.text = currentHP + "";
     }
 
@@ -51,6 +53,7 @@ public class PlayerHealth : MonoBehaviour {
 
     public void gainHealth(int health) {
         currentHP += health;
+        //GM.GetComponent<Manager>().setCurrentHealth();
         healthUI.text = currentHP + "";
     }
 }

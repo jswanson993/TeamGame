@@ -20,6 +20,8 @@ public class Manager : MonoBehaviour {
             lastPosition = SceneLoader.GetComponent<ScenePositionLoader>().getLastHeading();
             Debug.LogError("Heading LP= " + lastPosition);
         }
+        //currentHealth = 100;
+        //setCurrentHealth();
 
         
     }
@@ -52,6 +54,6 @@ public class Manager : MonoBehaviour {
     }
 
     public void setCurrentHealth() {
-        currentHealth = GetComponent<PlayerHealth>().getCurrentHealth();
+        //currentHealth = GetComponent<PlayerHealth>().getCurrentHealth();
     }
 }
