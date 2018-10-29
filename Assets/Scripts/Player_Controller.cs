@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System.Windows.Forms;
 
 public class Player_Controller : MonoBehaviour {
 
@@ -32,9 +33,13 @@ public class Player_Controller : MonoBehaviour {
     public JumpState jState;
     public float stickToGroundForce = 100;
 
+    private Grapple playerGrapple;
+    public float time;
+
     // Use this for initialization
     void Start () {
-
+        rotation =Camera.main.transform.eulerAngles;
+        playerGrapple = GetComponent<Grapple>();
         p_rigidbody = GetComponent<Rigidbody>(); 
         jState = JumpState.Grounded;
         Rigid = GetComponent<Rigidbody>();
@@ -43,6 +48,8 @@ public class Player_Controller : MonoBehaviour {
         playerCanJump = true;
         FPGUN = GameObject.Find("FP_Gun");
         GUN = GameObject.Find("Gun");
+        time = 0;
+        getPickup("Gun Pickup");
 
         if (hasGun) {
             if (is3D) {
@@ -71,6 +78,23 @@ public class Player_Controller : MonoBehaviour {
         HShift = Vector3.zero;
     }
 	
+    public void refreshIs3D()
+    {
+        if (!is3D)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            //SendKeys.Send("{ESCAPE}");
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
 	// Update is called once per frame
 	void Update () {
 
@@ -87,20 +111,50 @@ public class Player_Controller : MonoBehaviour {
             groundTest();
         }
         */
+        
         groundTest();
-        Debug.Log(jState.ToString());
+        if (!groundTest())
+        {
+            time += Time.deltaTime;
+        }
+        else {
+            if (time >= 2) {
+                GetComponent<PlayerHealth>().takeDamage((int)(time * 10));
+                Debug.Log("DamageDealt");
+
+            }
+
+            time = 0;
+            
+        }
+
+        if (jState == JumpState.Wallrunning)
+        {
+            time = 0;
+        }
+        
+
+
+        //Debug.Log(jState.ToString());
 	}
 
     void FixedUpdate()
     {
-        if (is3D) { processFPMovementInput(); }
-        else { process2DMovementInput();
+        if (is3D && !playerGrapple.fired) { processFPMovementInput(); }
+
+        else if (!playerGrapple.fired)
+        { process2DMovementInput();
             aim2d();
+        }
+        if (is3D)
+        {
+            TestRotation();
         }
     }
 
     private void wallRun()
     {
+        time = 0;
         RaycastHit filteredHit;
         Vector3 rayDirection;
 
@@ -170,7 +224,14 @@ public class Player_Controller : MonoBehaviour {
         {
             Vector3 haltVel = new Vector3(p_rigidbody.velocity.x, 0, p_rigidbody.velocity.z);
             p_rigidbody.velocity = haltVel;
-            Rigid.AddForce(Vector3.up * JumpForce);
+            if (is3D)
+            {
+                Rigid.AddForce(Vector3.up * JumpForce);
+            }
+            else
+            {
+                Rigid.AddForce(Vector3.up * JumpForce * 1.3f);
+            }
             jState = JumpState.InAir;
             Debug.Log("Jump");
         }
@@ -188,10 +249,18 @@ public class Player_Controller : MonoBehaviour {
     }
 
     private void aim2d() {
-        Vector2 point = Camera.main.WorldToScreenPoint(Input.mousePosition);
-        shotPoint.LookAt(point);
-        Debug.DrawRay(shotPoint.position, shotPoint.forward * 20);
-        //GUN.transform.eulerAngles = new Vector3(0,0,aim.z);
+       Vector3 mouse_pos = Input.mousePosition;
+        mouse_pos.z = -20;
+        Vector3 object_pos = Camera.main.WorldToScreenPoint(GUN.transform.position);
+        mouse_pos.x = mouse_pos.x - object_pos.x;
+        mouse_pos.y = mouse_pos.y - object_pos.y;
+        float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+        if (mouse_pos.x > this.transform.position.x + ((float)Screen.width * .04)) {
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+        } else if(mouse_pos.x < this.transform.position.x - ((float)Screen.width * .04)) {
+            this.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+       GUN.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     private bool CanWallRun()
@@ -220,7 +289,7 @@ public class Player_Controller : MonoBehaviour {
         Vector3 endpoint;
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward), out hit, Mathf.Infinity))
+        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward, transform.TransformDirection(Camera.main.transform.forward), out hit, Mathf.Infinity))
         {
             Debug.DrawRay(Camera.main.transform.position, (Camera.main.transform.forward) * hit.distance, Color.yellow);
             Debug.Log("Did Hit");
@@ -233,6 +302,10 @@ public class Player_Controller : MonoBehaviour {
                 
 
             }
+            if (hit.collider.GetComponent<Killable>())
+            {
+                hit.collider.GetComponent<Killable>().TakeDamage(5);
+            }
             /*
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cube.transform.position = endpoint;
@@ -244,11 +317,11 @@ public class Player_Controller : MonoBehaviour {
         {
             Debug.DrawRay(Camera.main.transform.position, transform.TransformDirection(Camera.main.transform.forward) * 1000, Color.white);
             Debug.Log("Did not Hit");
-            endpoint = transform.TransformDirection(Camera.main.transform.forward) * 1000;
+            endpoint = Camera.main.transform.position + Camera.main.transform.forward * 1000;
         }
         
-        GetComponent<LineRenderer>().enabled = true;
-        GetComponent<LineRenderer>().SetPositions(new Vector3[] {shotPoint.position, endpoint});
+        transform.GetChild(0).GetComponent<LineRenderer>().enabled = true;
+        transform.GetChild(0).GetComponent<LineRenderer>().SetPositions(new Vector3[] {shotPoint.position, endpoint});
         Invoke("RemoveTrail", .06f);
         /*
         GameObject cube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -275,15 +348,19 @@ public class Player_Controller : MonoBehaviour {
                 }
 
             }
+            if (hit.collider.GetComponent<Killable>())
+            {
+                hit.collider.GetComponent<Killable>().TakeDamage(5);
+            }
 
         } else {
             Debug.DrawRay(shotPoint.position, transform.TransformDirection(shotPoint.forward) * 1000, Color.white);
-            endpoint = transform.TransformDirection(shotPoint.forward) * 1000;
+            endpoint = (shotPoint.forward) * 1000;
             Debug.Log("RayMissed");
         }
 
-        GetComponent<LineRenderer>().enabled = true;
-        GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
+        transform.GetChild(0).GetComponent<LineRenderer>().enabled = true;
+        transform.GetChild(0).GetComponent<LineRenderer>().SetPositions(new Vector3[] { shotPoint.position, endpoint });
         Invoke("RemoveTrail", .06f);
         ///*
     }
@@ -292,12 +369,12 @@ public class Player_Controller : MonoBehaviour {
 
     private void RemoveTrail()
     {
-        GetComponent<LineRenderer>().enabled = false;
+        transform.GetChild(0).GetComponent<LineRenderer>().enabled = false;
     }
 
     private void processFPMovementInput()
     {
-        TestRotation();
+        
         
 
         if (jState == JumpState.Grounded)
@@ -322,7 +399,15 @@ public class Player_Controller : MonoBehaviour {
             Rigid.velocity = new Vector3(moveVec.x, Rigid.velocity.y, moveVec.z);
             if (!Input.GetButton("Jump"))
             {
-                Rigid.AddForce(Vector3.down * stickToGroundForce);
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, Vector3.down, out hit, 3F))
+                {
+                    Rigid.AddForce(-hit.normal * stickToGroundForce);
+                }
+                else
+                {
+                    //Rigid.AddForce(Vector3.down * stickToGroundForce);
+                }
             }
 
         }
@@ -390,17 +475,29 @@ public class Player_Controller : MonoBehaviour {
             float Shift = Input.GetAxis("Horizontal") * MoveSpeed;
            
             //Changes the rotation of the player based on the direction they are moving
-            if (Shift > 0) {
-                this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //if (Shift > 0) {
+            //    this.transform.rotation = Quaternion.Euler(0, 0, 0);
                 //shotPoint.transform.rotation = Quaternion.Euler(0, 90, 0);
-            } else if (Shift < 0) {
-               this.transform.rotation = Quaternion.Euler(0, 180, 0);
+            //} else if (Shift < 0) {
+            //   this.transform.rotation = Quaternion.Euler(0, 180, 0);
                 //shotPoint.transform.rotation = Quaternion.Euler(0, -90, 0);
-            }
+            //}
 
             
             //Debug.Log(Shift.ToString());
             Rigid.velocity = new Vector3(Shift, Rigid.velocity.y, 0);
+            if (!Input.GetButton("Jump") && jState == JumpState.Grounded)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, Vector3.down, out hit, 3F))
+                {
+                    Rigid.AddForce(-hit.normal * stickToGroundForce);
+                }
+                else
+                {
+                    //Rigid.AddForce(Vector3.down * stickToGroundForce);
+                }
+            }
 
         }
     }
@@ -445,18 +542,16 @@ public class Player_Controller : MonoBehaviour {
     }
 
     public void getPickup(System.String pickup) {
-        if (pickup == "Gun Pickup")
-        {
+        if (pickup == "Gun Pickup") {
             hasGun = true;
             //GameObject gun = GameObject.Find("Gun");
-            if (!is3D)
-            {
+            if (!is3D) {
                 GUN.SetActive(true);
-            }
-            else
-            {
+            } else {
                 FPGUN.SetActive(true);
             }
+        } else if (pickup == "Grapple Pickup") {
+            GetComponent<Grapple>().enableGrapple();
         }
 
 
