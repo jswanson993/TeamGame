@@ -2089,11 +2089,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6b6cf46278127499b5286ccf5768d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PatrolTargets:
-  - {fileID: 659628845}
-  - {fileID: 742515636}
-  LoopState: 0
-  waitTime: 2
 --- !u!195 &168259601
 NavMeshAgent:
   m_ObjectHideFlags: 0
