@@ -120,7 +120,7 @@ public class Player_Controller : MonoBehaviour {
         }
         else {
             if (time >= 2) {
-                GetComponent<PlayerHealth>().takeDamage((int)(time * 10));
+                GetComponent<PlayerHealth>().takeDamage((int)(time * 35));
                 Debug.Log("DamageDealt");
 
             }
