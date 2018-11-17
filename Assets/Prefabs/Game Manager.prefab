@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4117573836114228}
   - component: {fileID: 114518428324160398}
+  - component: {fileID: 114710145566376806}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: GameController
@@ -53,3 +54,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   is3d: 0
   SceneLoader: {fileID: 0}
+  canvas: {fileID: 0}
+--- !u!114 &114710145566376806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1793198512104702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b788a2158be7f40be3e5237fe839b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseCanvas: {fileID: 223348579775632006, guid: b636796ed57c7894b90fdb9dd6ad93a6,
+    type: 2}
+  resume: {fileID: 114656030588087942, guid: b636796ed57c7894b90fdb9dd6ad93a6, type: 2}
+  quit: {fileID: 114069639577851746, guid: b636796ed57c7894b90fdb9dd6ad93a6, type: 2}

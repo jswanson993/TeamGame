@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 4717845214290290}
   - component: {fileID: 54521210090078892}
   - component: {fileID: 120516533602357772}
+  - component: {fileID: 114922675245292220}
   - component: {fileID: 114204978622690978}
   - component: {fileID: 114386821743688328}
   - component: {fileID: 114412957375630968}
@@ -482,7 +483,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  GM: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!114 &114204978622690978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -552,6 +553,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: d7abc5f1f8ac48f43b9dcf3973d0c245, type: 2}
+--- !u!114 &114922675245292220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828045127570740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9fb2fd2b115e54e8f83e6d1beb8e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GUN: {fileID: 1472567399405010}
 --- !u!120 &120101160495953866
 LineRenderer:
   m_ObjectHideFlags: 1

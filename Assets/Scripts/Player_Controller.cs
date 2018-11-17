@@ -36,6 +36,7 @@ public class Player_Controller : MonoBehaviour {
     private Grapple playerGrapple;
     public float time;
     public Texture2D mouseTex;
+    private float recoil;
     // Use this for initialization
     void Start () {
         rotation =Camera.main.transform.eulerAngles;
@@ -285,8 +286,29 @@ public class Player_Controller : MonoBehaviour {
         return false;
     }
 
+    private void setRecoil(float maxXRecoil, float recoilSpeed){
+        float maxYRecoil = UnityEngine.Random.Range(-maxXRecoil, maxXRecoil);
+
+        if (recoil > 0f)
+        {
+
+            Quaternion maxRecoil = Quaternion.Euler(-maxXRecoil, maxYRecoil, 0f);
+            // Dampen towards the target rotation
+            GUN.transform.localRotation = Quaternion.Slerp(GUN.transform.localRotation, maxRecoil, Time.deltaTime * recoilSpeed);
+            recoil -= Time.deltaTime;
+        }
+        else
+        {
+            recoil = 0f;
+            // Dampen towards the target rotation
+            GUN.transform.localRotation = Quaternion.Slerp(GUN.transform.localRotation, Quaternion.identity, Time.deltaTime * recoilSpeed / 2);
+        }
+
+    }
+
     private void shoot()
     {
+       
         Vector3 endpoint;
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
@@ -307,6 +329,13 @@ public class Player_Controller : MonoBehaviour {
             {
                 hit.collider.GetComponent<Killable>().TakeDamage(5);
             }
+            recoil = UnityEngine.Random.Range(0, 100);
+            float maxXRecoil = 20;
+            float recoilSpeed = 20;
+            setRecoil(maxXRecoil, recoilSpeed);
+            
+            
+
             /*
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cube.transform.position = endpoint;
