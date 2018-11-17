@@ -19,6 +19,8 @@ public class Pause : MonoBehaviour {
            isPaused = pauseGame();
         }
 	}
+    
+    
 
     public void Resume(){
         isPaused = pauseGame();
