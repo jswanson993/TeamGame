@@ -13843,6 +13843,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6b6cf46278127499b5286ccf5768d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PatrolTargets:
+  - {fileID: 266879334}
+  - {fileID: 627182561}
+  LoopState: 0
+  waitTime: 0
 --- !u!195 &1052261560
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -14831,6 +14836,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6b6cf46278127499b5286ccf5768d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PatrolTargets:
+  - {fileID: 41042210}
+  - {fileID: 722334134}
+  LoopState: 0
+  waitTime: 0
 --- !u!195 &1186365473
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -20097,7 +20107,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1755416436}
   m_LocalRotation: {x: 0.9996693, y: 0.000002949454, z: 0.025716472, w: 0.0000000758916}
-  m_LocalPosition: {x: -31.244188, y: 95.54001, z: -12.89016}
+  m_LocalPosition: {x: -31.3, y: 95.54001, z: -12}
   m_LocalScale: {x: 2.28, y: 1.8240019, z: 4.758527}
   m_Children: []
   m_Father: {fileID: 431330157}

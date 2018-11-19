@@ -11,8 +11,14 @@ public class Killable : MonoBehaviour {
     private int currentHealth;
     public float despawnTimer = 5f;
     private bool isDead;
-	void Start () {
+    private MeshRenderer meshRenderer;
+    Color lerpedColor = Color.white;
+    Color baseColor;
+    void Start () {
+        
         currentHealth = StartingHealth;
+        meshRenderer = GetComponent<MeshRenderer>();
+        baseColor = meshRenderer.material.color;
 	}
 	
 	// Update is called once per frame
@@ -22,11 +28,27 @@ public class Killable : MonoBehaviour {
 
     public void TakeDamage(int DamageTaken)
     {
+
         currentHealth = currentHealth - DamageTaken;
+        StopAllCoroutines();
+        StartCoroutine("HitFlash");
+
         if (currentHealth <= 0)
         {
             if(!isDead)
                 Die();
+        }
+    }
+
+    private IEnumerator HitFlash()
+    {
+        //meshRenderer.material.color = lerpedColor;
+
+        for (float f = 0f; f <= 100;f+=.1f)
+        {
+            lerpedColor = Color.Lerp(lerpedColor, baseColor, Time.deltaTime*3);
+            meshRenderer.material.color = lerpedColor;
+            yield return new WaitForSeconds(.01f);
         }
     }
 
