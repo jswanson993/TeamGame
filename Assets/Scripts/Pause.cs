@@ -6,12 +6,10 @@ using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour {
     bool isPaused = false;
     public Canvas pauseCanvas;
-    private Canvas newCanvas;
 
     private void Start(){
         Time.timeScale = 1f;
-        newCanvas = Instantiate(pauseCanvas);
-        newCanvas.enabled = false;
+        pauseCanvas.enabled = false;
     }
     // Update is called once per frame
     void Update () {
@@ -38,10 +36,10 @@ public class Pause : MonoBehaviour {
             Time.timeScale = 1f;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            newCanvas.enabled = false;
+            pauseCanvas.enabled = false;
             return false;
         } else {
-            newCanvas.enabled = true;
+            pauseCanvas.enabled = true;
             Time.timeScale = 0.0f;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

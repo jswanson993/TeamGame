@@ -16,7 +16,7 @@ public class Player_Controller : MonoBehaviour {
     public float maxAirSpeed;
     static bool playerCanJump;
     public bool hasGun;
-  
+    public Animator animator;
     public Rigidbody Rigid;
     private Vector2 rotation = new Vector2(0, 0);
     public Transform shotPoint;
@@ -41,7 +41,7 @@ public class Player_Controller : MonoBehaviour {
     void Start () {
         rotation =Camera.main.transform.eulerAngles;
         playerGrapple = GetComponent<Grapple>();
-        p_rigidbody = GetComponent<Rigidbody>(); 
+        p_rigidbody = GetComponent<Rigidbody>();
         jState = JumpState.Grounded;
         Rigid = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -117,13 +117,18 @@ public class Player_Controller : MonoBehaviour {
         groundTest();
         if (!groundTest())
         {
-            time += Time.deltaTime;
+            if (Rigid.velocity.y < 0) {
+                time += Time.deltaTime;
+            }
         }
         else {
-            if (time >= 2) {
-                GetComponent<PlayerHealth>().takeDamage((int)(time * 35));
-                Debug.Log("DamageDealt");
+            if (time >= 2 && time < 3) {
+                GetComponent<PlayerHealth>().takeDamage(25);
+                Debug.Log(time);
 
+            } else if( time >= 3 && time >= 4) {
+                GetComponent<PlayerHealth>().takeDamage(100);
+                Debug.Log(time);
             }
 
             time = 0;
@@ -235,6 +240,7 @@ public class Player_Controller : MonoBehaviour {
                 Rigid.AddForce(Vector3.up * JumpForce * 1.3f);
             }
             jState = JumpState.InAir;
+            animator.SetBool("Jump", !groundTest());
             Debug.Log("Jump");
         }
 
@@ -503,7 +509,7 @@ public class Player_Controller : MonoBehaviour {
         if (jState != JumpState.Wallrunning)
         {
             float Shift = Input.GetAxis("Horizontal") * MoveSpeed;
-           
+          
             //Changes the rotation of the player based on the direction they are moving
             //if (Shift > 0) {
             //    this.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -516,8 +522,10 @@ public class Player_Controller : MonoBehaviour {
             
             //Debug.Log(Shift.ToString());
             Rigid.velocity = new Vector3(Shift, Rigid.velocity.y, 0);
+            animator.SetFloat("Speed", Shift);
             if (!Input.GetButton("Jump") && jState == JumpState.Grounded)
             {
+                
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, Vector3.down, out hit, 3F))
                 {

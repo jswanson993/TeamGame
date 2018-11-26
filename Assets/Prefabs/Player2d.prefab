@@ -1048,6 +1048,7 @@ GameObject:
   - component: {fileID: 114802206007980636}
   - component: {fileID: 114934741299646766}
   - component: {fileID: 114984693148075800}
+  - component: {fileID: 95849901466891104}
   m_Layer: 11
   m_Name: Player2d
   m_TagString: Player
@@ -2523,6 +2524,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!95 &95849901466891104
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1856755762473786}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b3599e619accdbb45a19a3e28b1887ac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114612844751117194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2542,6 +2561,7 @@ MonoBehaviour:
   MaxMoveSpeed: 10
   maxAirSpeed: 10
   hasGun: 0
+  animator: {fileID: 95849901466891104}
   Rigid: {fileID: 0}
   shotPoint: {fileID: 4584606657572000}
   FPGUN: {fileID: 0}
