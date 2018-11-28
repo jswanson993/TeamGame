@@ -28,7 +28,7 @@ public class Player_Controller : MonoBehaviour {
     Vector3 HShift;
     public bool isWallLeaping;
     public bool is3D = true;
-
+    private bool idle;
     public enum JumpState {Grounded, InAir, Wallrunning};
     public JumpState jState;
     public float stickToGroundForce = 100;
@@ -51,7 +51,7 @@ public class Player_Controller : MonoBehaviour {
         GUN = GameObject.Find("Gun");
         time = 0;
         getPickup("Gun Pickup");
-
+        idle = true;
         if (hasGun) {
             if (is3D) {
                 GameObject.Find("FP_Gun").SetActive(true);
@@ -225,8 +225,6 @@ public class Player_Controller : MonoBehaviour {
             }
         }
 
-
-
         if (Input.GetButtonDown("Jump") && groundTest())
         {
             Vector3 haltVel = new Vector3(p_rigidbody.velocity.x, 0, p_rigidbody.velocity.z);
@@ -238,9 +236,10 @@ public class Player_Controller : MonoBehaviour {
             else
             {
                 Rigid.AddForce(Vector3.up * JumpForce * 1.3f);
+                animator.SetBool("Jump", true);
             }
             jState = JumpState.InAir;
-            animator.SetBool("Jump", !groundTest());
+            
             Debug.Log("Jump");
         }
 
@@ -506,26 +505,36 @@ public class Player_Controller : MonoBehaviour {
 
     private void process2DMovementInput()
     {
+        
         if (jState != JumpState.Wallrunning)
         {
             float Shift = Input.GetAxis("Horizontal") * MoveSpeed;
-          
+
             //Changes the rotation of the player based on the direction they are moving
             //if (Shift > 0) {
             //    this.transform.rotation = Quaternion.Euler(0, 0, 0);
-                //shotPoint.transform.rotation = Quaternion.Euler(0, 90, 0);
+            //shotPoint.transform.rotation = Quaternion.Euler(0, 90, 0);
             //} else if (Shift < 0) {
             //   this.transform.rotation = Quaternion.Euler(0, 180, 0);
-                //shotPoint.transform.rotation = Quaternion.Euler(0, -90, 0);
+            //shotPoint.transform.rotation = Quaternion.Euler(0, -90, 0);
             //}
 
-            
+           if (Shift == 0) {
+                idle = true;
+                animator.SetBool("Idle", idle);
+            } else {
+                idle = false;
+                animator.SetBool("Idle", idle);
+           }
             //Debug.Log(Shift.ToString());
             Rigid.velocity = new Vector3(Shift, Rigid.velocity.y, 0);
-            animator.SetFloat("Speed", Shift);
+            if (jState == JumpState.Grounded) {
+                animator.SetFloat("Speed", Math.Abs(Shift));
+                animator.SetBool("Jump", false);
+            }
+            
             if (!Input.GetButton("Jump") && jState == JumpState.Grounded)
             {
-                
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, Vector3.down, out hit, 3F))
                 {
