@@ -27,6 +27,11 @@ public class Buttons : MonoBehaviour
         //Output this to console when Button1 or Button3 is clicked
         Debug.Log("You have clicked the button!");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        if (GameObject.Find("MusicManager") != null)
+        {
+            GameObject.Find("MusicManager").GetComponent<AudioSource>().Stop();
+        }
     }
 
     void TaskOnClick2()
