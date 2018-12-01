@@ -214,6 +214,13 @@ public class Player_Controller : MonoBehaviour {
         
     }
 
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        animator.SetBool("Jump", false);
+    }
+
     private void processButtonInput()
     {
         if (Input.GetButtonDown("Fire1") && hasGun)
@@ -237,6 +244,8 @@ public class Player_Controller : MonoBehaviour {
             {
                 Rigid.AddForce(Vector3.up * JumpForce * 1.3f);
                 animator.SetBool("Jump", true);
+
+                StartCoroutine(ExecuteAfterTime(.5f));
             }
             jState = JumpState.InAir;
             
@@ -530,7 +539,7 @@ public class Player_Controller : MonoBehaviour {
             Rigid.velocity = new Vector3(Shift, Rigid.velocity.y, 0);
             if (jState == JumpState.Grounded) {
                 animator.SetFloat("Speed", Math.Abs(Shift));
-                animator.SetBool("Jump", false);
+                
             }
             
             if (!Input.GetButton("Jump") && jState == JumpState.Grounded)
