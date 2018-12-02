@@ -301,9 +301,11 @@ public class Player_Controller : MonoBehaviour {
     }
 
     private void setRecoil(float maxXRecoil, float recoilSpeed){
-        float maxYRecoil = UnityEngine.Random.Range(-maxXRecoil, maxXRecoil);
 
-        if (recoil > 0f)
+        /*
+        float maxYRecoil = UnityEngine.Random.Range(-maxXRecoil, maxXRecoil);
+        Quaternion startingPos = GUN.transform.localRotation;
+        if (recoil != 0f)
         {
 
             Quaternion maxRecoil = Quaternion.Euler(-maxXRecoil, maxYRecoil, 0f);
@@ -315,8 +317,10 @@ public class Player_Controller : MonoBehaviour {
         {
             recoil = 0f;
             // Dampen towards the target rotation
-            GUN.transform.localRotation = Quaternion.Slerp(GUN.transform.localRotation, Quaternion.identity, Time.deltaTime * recoilSpeed / 2);
+            GUN.transform.localRotation = Quaternion.Slerp(startingPos, Quaternion.identity, Time.deltaTime * recoilSpeed / 2);
         }
+        */
+        
 
     }
 
