@@ -37,8 +37,14 @@ public class Player_Controller : MonoBehaviour {
     public float time;
     public Texture2D mouseTex;
     private float recoil;
+    private AudioSource footstepSoundLoc;
+    private float footstepTimer;
+    public float footstepInterval = .5f;
+    public AudioClip[] footsteps;
+
     // Use this for initialization
     void Start () {
+        footstepSoundLoc = GameObject.Find("FootstepSoundLoc").GetComponent<AudioSource>();
         rotation =Camera.main.transform.eulerAngles;
         playerGrapple = GetComponent<Grapple>();
         p_rigidbody = GetComponent<Rigidbody>();
@@ -100,7 +106,15 @@ public class Player_Controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        
+        footstepTimer += Time.deltaTime;
+        if((Math.Abs(Input.GetAxis("Horizontal")) > 0|| Math.Abs(Input.GetAxis("Vertical")) > 0) && jState == JumpState.Grounded && footstepTimer > footstepInterval)
+        {
+            //playsound
+            footstepSoundLoc.PlayOneShot(footsteps[UnityEngine.Random.Range(0, footsteps.Length - 1)]);
+            footstepTimer = 0f;
+            Debug.Log("Playsound");
+        } 
+
         processButtonInput();
 
         /*
